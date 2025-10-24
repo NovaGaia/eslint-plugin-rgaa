@@ -5,7 +5,7 @@ title: Lien composite
 # Lien composite
 
 
-En HTML, [lien](#lien) contenant à la fois du texte et un ou plusieurs enfants de type image :
+En HTML, [lien](/rgaa/glossaire/lien) contenant à la fois du texte et un ou plusieurs enfants de type image :
 
 - Image (balise `<img>` ou balise ouvrante ayant l’attribut WAI-ARIA `role="img"`) ;
 - Zone cliquable (balise `<area>`) possédant un attribut `href` ;

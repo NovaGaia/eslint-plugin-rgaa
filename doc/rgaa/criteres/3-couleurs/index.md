@@ -96,9 +96,9 @@ Dans chaque page web, les couleurs utilisées dans les composants d'interface ou
 - [Techniques WCAG pour les couleurs](https://www.w3.org/WAI/WCAG21/Techniques/general/G14)
 
 ### Glossaire RGAA
-- [Contraste](../glossaire/contraste)
-- [Information (donnée par la couleur)](../glossaire/information-donnee-par-la-couleur)
-- [Image véhiculant une information (donnée par la couleur)](../glossaire/image-vehiculant-une-information-donnee-par-la-couleur)
+- [Contraste](../../glossaire/contraste)
+- [Information (donnée par la couleur)](../../glossaire/information-donnee-par-la-couleur)
+- [Image véhiculant une information (donnée par la couleur)](../../glossaire/image-vehiculant-une-information-donnee-par-la-couleur)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 

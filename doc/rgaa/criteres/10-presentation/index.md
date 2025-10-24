@@ -75,11 +75,11 @@ Dans chaque page web, les contenus additionnels apparaissant via les styles CSS 
 - [WCAG 2.1 - Presentation](https://www.w3.org/WAI/WCAG21/quickref/#presentation)
 
 ### Glossaire RGAA
-- [Présentation de l'information](../../glossaire/presentation-de-l'information)
-- [Feuille de style](../../glossaire/feuille-de-style)
-- [Contenu visible](../../glossaire/contenu-visible)
-- [Contenu caché](../../glossaire/contenu-cache)
-- [Prise de focus](../../glossaire/prise-de-focus)
+- [Présentation de l'information](/rgaa/glossaire/presentation-de-l'information)
+- [Feuille de style](/rgaa/glossaire/feuille-de-style)
+- [Contenu visible](/rgaa/glossaire/contenu-visible)
+- [Contenu caché](/rgaa/glossaire/contenu-cache)
+- [Prise de focus](/rgaa/glossaire/prise-de-focus)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 

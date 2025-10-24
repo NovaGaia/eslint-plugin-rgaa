@@ -57,11 +57,11 @@ Chaque tableau de mise en forme ne doit pas utiliser d'éléments propres aux ta
 - [WCAG 2.1 - Tables](https://www.w3.org/WAI/WCAG21/quickref/#tables)
 
 ### Glossaire RGAA
-- [Tableau de données](../../glossaire/tableau-de-donnees)
-- [Tableau de données complexe](../../glossaire/tableau-de-donnees-complexe)
-- [Tableau de mise en forme](../../glossaire/tableau-de-mise-en-forme)
-- [En-tête de colonne ou de ligne](../../glossaire/en-tete-de-colonne-ou-de-ligne)
-- [Résumé (de tableau)](../../glossaire/resume-(de-tableau))
+- [Tableau de données](/rgaa/glossaire/tableau-de-donnees)
+- [Tableau de données complexe](/rgaa/glossaire/tableau-de-donnees-complexe)
+- [Tableau de mise en forme](/rgaa/glossaire/tableau-de-mise-en-forme)
+- [En-tête de colonne ou de ligne](/rgaa/glossaire/en-tete-de-colonne-ou-de-ligne)
+- [Résumé (de tableau)](/rgaa/glossaire/resume-(de-tableau))
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 

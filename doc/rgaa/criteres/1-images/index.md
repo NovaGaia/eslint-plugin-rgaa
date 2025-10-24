@@ -107,10 +107,10 @@ Chaque légende d'image est-elle, si nécessaire, correctement reliée à l'imag
 - [Techniques WCAG pour les images](https://www.w3.org/WAI/WCAG21/Techniques/html/H36)
 
 ### Glossaire RGAA
-- [Alternative textuelle (image)](../glossaire/alternative-textuelle-image)
-- [Image de décoration](../glossaire/image-de-decoration)
-- [Image porteuse d'information](../glossaire/image-porteuse-d-information)
-- [Description détaillée (image)](../glossaire/description-detaillee-image)
+- [Alternative textuelle (image)](/rgaa/glossaire/alternative-textuelle-image)
+- [Image de décoration](/rgaa/glossaire/image-de-decoration)
+- [Image porteuse d'information](/rgaa/glossaire/image-porteuse-d-information)
+- [Description détaillée (image)](/rgaa/glossaire/description-detaillee-image)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 

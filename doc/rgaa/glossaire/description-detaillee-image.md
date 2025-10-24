@@ -9,7 +9,7 @@ Contenu associé à une image en complément de son alternative textuelle afin d
 
 - Un attribut `longdesc` qui contient l’adresse d’une page ou d’un emplacement dans la page contenant la description détaillée ;
 - Une référence à une description détaillée adjacente à l’image dans l’alternative textuelle ;
-- Un [lien ou un bouton adjacent](#lien-ou-bouton-adjacent) qui permet d’accéder à la description détaillée dans la page ou dans une autre page ;
+- Un [lien ou un bouton adjacent](/rgaa/glossaire/lien-ou-bouton-adjacent) qui permet d’accéder à la description détaillée dans la page ou dans une autre page ;
 - Un ou plusieurs passages de texte identifiés par un id et liés par un attribut WAI-ARIA `aria-describedby` sur le modèle `aria-describedby="ID1 ID2 ID3…"`.
 
 Note 1 : Si le support de l’attribut `aria-describedby` fait défaut, il est possible d’utiliser un ou plusieurs passages de texte identifiés par un `id` et liés par un attribut WAI-ARIA `aria-labelledby` à la suite de l’alternative textuelle.

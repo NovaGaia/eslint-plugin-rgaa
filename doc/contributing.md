@@ -6,7 +6,7 @@ Merci de votre intérêt pour contribuer à eslint-plugin-rgaa ! Ce guide vous a
 
 ### Signaler un bug
 
-1. Vérifiez que le bug n'a pas déjà été signalé dans les [issues](https://github.com/renaudheluin/eslint-plugin-rgaa/issues)
+1. Vérifiez que le bug n'a pas déjà été signalé dans les [issues](https://github.com/NovaGaia/eslint-plugin-rgaa/issues)
 2. Créez une nouvelle issue avec le template "Bug Report"
 3. Incluez :
    - Description détaillée du problème
@@ -46,7 +46,7 @@ Merci de votre intérêt pour contribuer à eslint-plugin-rgaa ! Ce guide vous a
 
 ```bash
 # Cloner le repository
-git clone https://github.com/renaudheluin/eslint-plugin-rgaa.git
+git clone https://github.com/NovaGaia/eslint-plugin-rgaa.git
 cd eslint-plugin-rgaa
 
 # Installer pnpm (si pas déjà installé)
@@ -68,7 +68,7 @@ eslint-plugin-rgaa/
 │   ├── html/           # Linter HTML de base
 │   └── astro/          # Extensions Astro
 ├── tests/              # Tests unitaires
-├── doc/                # Documentation
+├── /rgaa/                # Documentation
 └── examples/           # Exemples d'utilisation
 ```
 
@@ -172,8 +172,8 @@ ruleTester.run('alt-text', rule, {
 
 ### Mise à jour de la documentation
 
-1. **Critères RGAA** : Mettez à jour `doc/rgaa/` si nécessaire
-2. **Guide d'utilisation** : Modifiez `doc/guide.md`
+1. **Critères RGAA** : Mettez à jour `/rgaa/` si nécessaire
+2. **Guide d'utilisation** : Modifiez `/rgaa/guide.md`
 3. **API Reference** : Générez automatiquement avec JSDoc
 
 ### Génération de la documentation
@@ -199,7 +199,7 @@ Lorsque vous recevez de nouveaux fichiers de documentation RGAA (critères, test
 
 Les fichiers RGAA sont généralement organisés comme suit :
 ```
-doc/rgaa/
+/rgaa/rgaa/
 ├── criteres/
 │   ├── 1.1/
 │   │   ├── index.md          # Critère principal
@@ -406,8 +406,8 @@ Le projet utilise [Semantic Versioning](https://semver.org/) :
 
 ## 📞 Support
 
-- **Issues** : [GitHub Issues](https://github.com/renaudheluin/eslint-plugin-rgaa/issues)
-- **Discussions** : [GitHub Discussions](https://github.com/renaudheluin/eslint-plugin-rgaa/discussions)
+- **Issues** : [GitHub Issues](https://github.com/NovaGaia/eslint-plugin-rgaa/issues)
+- **Discussions** : [GitHub Discussions](https://github.com/NovaGaia/eslint-plugin-rgaa/discussions)
 - **Email** : [contact@example.com](mailto:contact@example.com)
 
 ## 🙏 Remerciements

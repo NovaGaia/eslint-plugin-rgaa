@@ -48,11 +48,11 @@ Dans chaque page web, les messages de statut sont-ils correctement restitués pa
 - [WCAG 2.1 - Scripts](https://www.w3.org/WAI/WCAG21/quickref/#scripts)
 
 ### Glossaire RGAA
-- [Script](../../glossaire/script)
-- [Alternative (à script)](../../glossaire/alternative-(a-script))
-- [Changement de contexte](../../glossaire/changement-de-contexte)
-- [Message de statut](../../glossaire/message-de-statut)
-- [Compatible avec les technologies d'assistance](../../glossaire/compatible-avec-les-technologies-d'assistance)
+- [Script](/rgaa/glossaire/script)
+- [Alternative (à script)](/rgaa/glossaire/alternative-(a-script))
+- [Changement de contexte](/rgaa/glossaire/changement-de-contexte)
+- [Message de statut](/rgaa/glossaire/message-de-statut)
+- [Compatible avec les technologies d'assistance](/rgaa/glossaire/compatible-avec-les-technologies-d'assistance)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 

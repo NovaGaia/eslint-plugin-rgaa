@@ -5,7 +5,7 @@ title: Couleur d’arrière-plan contiguë et couleur contiguë
 # Couleur d’arrière-plan contiguë et couleur contiguë
 
 
-Couleur d’arrière-plan contiguë : couleur d’arrière-plan directement en contact avec le bord extérieur du composant d’interface ou de l’[élément graphique](#element-graphique).
+Couleur d’arrière-plan contiguë : couleur d’arrière-plan directement en contact avec le bord extérieur du composant d’interface ou de l’[élément graphique](/rgaa/glossaire/element-graphique).
 
 Exemples :
 

@@ -85,21 +85,21 @@ module.exports = {
 
 ### Outils et ressources
 - [Glossaire RGAA](../glossaire/) - Définitions des termes techniques
-- [Critères RGAA](../criteres/) - Documentation complète des critères
-- [eslint-plugin-rgaa](https://github.com/renaudheluin/eslint-plugin-rgaa) - Plugin ESLint
+- [Critères RGAA](/rgaa/#criteres-d-accessibilite) - Documentation complète des critères
+- [eslint-plugin-rgaa](https://github.com/NovaGaia/eslint-plugin-rgaa) - Plugin ESLint
 
 ## 🤝 Contribuer
 
 Cette FAQ évolue avec les questions de la communauté. Pour contribuer :
 
-1. **Signaler une question manquante** via les [issues GitHub](https://github.com/renaudheluin/eslint-plugin-rgaa/issues)
+1. **Signaler une question manquante** via les [issues GitHub](https://github.com/NovaGaia/eslint-plugin-rgaa/issues)
 2. **Proposer une amélioration** via une Pull Request
 3. **Partager votre expérience** dans les discussions
 
 ## 📞 Support
 
-- **Issues** : [GitHub Issues](https://github.com/renaudheluin/eslint-plugin-rgaa/issues)
-- **Discussions** : [GitHub Discussions](https://github.com/renaudheluin/eslint-plugin-rgaa/discussions)
+- **Issues** : [GitHub Issues](https://github.com/NovaGaia/eslint-plugin-rgaa/issues)
+- **Discussions** : [GitHub Discussions](https://github.com/NovaGaia/eslint-plugin-rgaa/discussions)
 - **Email** : [contact@example.com](mailto:contact@example.com)
 
 ---

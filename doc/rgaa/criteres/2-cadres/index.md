@@ -83,8 +83,8 @@ Pour chaque cadre ayant un titre de cadre, ce titre de cadre est-il pertinent ?
 - [Techniques WCAG pour les frames](https://www.w3.org/WAI/WCAG21/Techniques/html/H64)
 
 ### Glossaire RGAA
-- [Cadre](../glossaire/cadre)
-- [Titre de cadre](../glossaire/titre-de-cadre)
+- [Cadre](../../glossaire/cadre)
+- [Titre de cadre](../../glossaire/titre-de-cadre)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 

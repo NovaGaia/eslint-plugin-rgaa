@@ -5,7 +5,7 @@ title: Lien texte
 # Lien texte
 
 
-En HTML, [lien](#lien) ne contenant aucun élément enfant de type :
+En HTML, [lien](/rgaa/glossaire/lien) ne contenant aucun élément enfant de type :
 
 - Image (balise `<img>` ou balise ouvrante ayant l’attribut WAI-ARIA `role="img"`) ;
 - Image objet (balise `<object>`) ;

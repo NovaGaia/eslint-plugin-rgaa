@@ -72,11 +72,11 @@ Chaque média temporel et non temporel est-il compatible avec les technologies d
 - [WCAG 2.1 - Media](https://www.w3.org/WAI/WCAG21/quickref/#media)
 
 ### Glossaire RGAA
-- [Média temporel (type son, vidéo et synchronisé)](../../glossaire/media-temporel-(type-son,-video-et-synchronise))
-- [Média non temporel](../../glossaire/media-non-temporel)
-- [Transcription textuelle (média temporel)](../../glossaire/transcription-textuelle-(media-temporel))
-- [Audiodescription synchronisée (média temporel)](../../glossaire/audiodescription-synchronisee-(media-temporel))
-- [Sous-titres synchronisés (objet multimédia)](../../glossaire/sous-titres-synchronises-(objet-multimedia))
+- [Média temporel (type son, vidéo et synchronisé)](/rgaa/glossaire/media-temporel-(type-son,-video-et-synchronise))
+- [Média non temporel](/rgaa/glossaire/media-non-temporel)
+- [Transcription textuelle (média temporel)](/rgaa/glossaire/transcription-textuelle-(media-temporel))
+- [Audiodescription synchronisée (média temporel)](/rgaa/glossaire/audiodescription-synchronisee-(media-temporel))
+- [Sous-titres synchronisés (objet multimédia)](/rgaa/glossaire/sous-titres-synchronises-(objet-multimedia))
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 

@@ -45,10 +45,10 @@ Dans chaque page web, chaque citation est-elle correctement indiquée ?
 - [WCAG 2.1 - Headings](https://www.w3.org/WAI/WCAG21/quickref/#headings)
 
 ### Glossaire RGAA
-- [Titre](../../glossaire/titre)
-- [Structure du document](../../glossaire/structure-du-document)
-- [Listes](../../glossaire/listes)
-- [Landmarks](../../glossaire/landmarks)
+- [Titre](/rgaa/glossaire/titre)
+- [Structure du document](/rgaa/glossaire/structure-du-document)
+- [Listes](/rgaa/glossaire/listes)
+- [Landmarks](/rgaa/glossaire/landmarks)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 

@@ -5,7 +5,7 @@ Ce dossier contient la documentation complète du plugin ESLint pour la validati
 ## 📁 Structure
 
 ```
-doc/
+/rgaa/
 ├── .vitepress/
 │   └── config.mjs          # Configuration VitePress
 ├── index.md                # Page d'accueil
@@ -119,14 +119,14 @@ Le fichier `.vitepress/config.mjs` contient :
 
 ### Ajout de nouveaux critères
 
-1. Créez le dossier du critère : `doc/rgaa/criteres/X.Y/`
+1. Créez le dossier du critère : `/rgaa/rgaa/criteres/X.Y/`
 2. Ajoutez les fichiers : `index.md`, `annexe.md`, `tests/`
 3. Exécutez : `pnpm run docs:setup`
 4. Vérifiez avec : `pnpm run docs:serve`
 
 ### Ajout de nouveaux termes au glossaire
 
-1. Créez le fichier : `doc/rgaa/glossaire/terme.md`
+1. Créez le fichier : `/rgaa/rgaa/glossaire/terme.md`
 2. Exécutez : `pnpm run docs:fix-internal-links`
 3. Vérifiez les liens internes
 
@@ -148,7 +148,7 @@ Les scripts fournissent des logs détaillés :
 
 ## 📚 Ressources
 
-- [Guide de contribution](../contributing.md)
+- [Guide de contribution](contributing.md)
 - [Configuration VitePress](https://vitepress.dev/)
 - [RGAA Officiel](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/)
 - [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/)
@@ -157,7 +157,7 @@ Les scripts fournissent des logs détaillés :
 
 Pour contribuer à la documentation :
 
-1. Lisez le [guide de contribution](../contributing.md)
+1. Lisez le [guide de contribution](contributing.md)
 2. Suivez le processus de mise à jour décrit ci-dessus
 3. Testez vos modifications avec `pnpm run docs:serve`
 4. Soumettez une Pull Request

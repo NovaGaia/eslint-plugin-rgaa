@@ -63,11 +63,11 @@ Dans chaque page web, les changements du sens de lecture sont-ils signalés ?
 - [WCAG 2.1 - Language](https://www.w3.org/WAI/WCAG21/quickref/#language)
 
 ### Glossaire RGAA
-- [Type de document](../../glossaire/type-de-document)
-- [Langue par défaut](../../glossaire/langue-par-defaut)
-- [Code de langue](../../glossaire/code-de-langue)
-- [Titre de page](../../glossaire/titre-de-page)
-- [Changement de langue](../../glossaire/changement-de-langue)
+- [Type de document](/rgaa/glossaire/type-de-document)
+- [Langue par défaut](/rgaa/glossaire/langue-par-defaut)
+- [Code de langue](/rgaa/glossaire/code-de-langue)
+- [Titre de page](/rgaa/glossaire/titre-de-page)
+- [Changement de langue](/rgaa/glossaire/changement-de-langue)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 
