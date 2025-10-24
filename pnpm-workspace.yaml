@@ -1,0 +1,5 @@
+# Configuration du workspace pnpm pour eslint-plugin-rgaa
+packages:
+  - 'libs/*'
+  - 'apps/*'
+  - 'tools/*'

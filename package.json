@@ -1,0 +1,66 @@
+{
+  "name": "eslint-plugin-rgaa",
+  "version": "0.1.0",
+  "description": "Linter ESLint pour valider les critères du Référentiel Général d'Amélioration de l'Accessibilité (RGAA)",
+  "main": "libs/core/index.js",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "accessibility",
+    "rgaa",
+    "a11y",
+    "linter",
+    "france"
+  ],
+  "author": "Renaud Heluin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/renaudheluin/eslint-plugin-rgaa.git"
+  },
+  "bugs": {
+    "url": "https://github.com/renaudheluin/eslint-plugin-rgaa/issues"
+  },
+  "homepage": "https://renaudheluin.github.io/eslint-plugin-rgaa/",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Tests à implémenter\"",
+    "lint": "eslint .",
+    "docs:build": "vitepress build doc",
+    "docs:serve": "vitepress dev doc",
+    "docs:publish": "vitepress build doc && gh-pages -d doc/.vitepress/dist",
+    "docs:watch": "vitepress dev doc",
+    "docs:add-titles": "node scripts/add-titles.js",
+    "docs:include-tests": "node scripts/include-tests.js",
+    "docs:include-annexes": "node scripts/include-annexes.js",
+    "docs:setup": "pnpm run docs:add-titles && pnpm run docs:include-tests && pnpm run docs:include-annexes && pnpm run docs:fix-links && pnpm run docs:fix-internal-links && pnpm run docs:add-titles-faq-glossaire",
+    "docs:fix-links": "node scripts/fix-wcag-links.js",
+    "docs:fix-internal-links": "node scripts/fix-internal-links.js",
+    "docs:add-titles-faq-glossaire": "node scripts/add-titles-faq-glossaire.js",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "clean": "turbo run clean",
+    "install:all": "pnpm install",
+    "build:all": "pnpm run build",
+    "test:all": "pnpm run test"
+  },
+  "packageManager": "pnpm@8.15.0",
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "gh-pages": "^6.0.0",
+    "js-yaml": "4.1.0",
+    "turbo": "^1.10.0",
+    "vitepress": "^1.0.0"
+  },
+  "peerDependencies": {
+    "eslint": ">=9.0.0"
+  },
+  "workspaces": [
+    "libs/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
