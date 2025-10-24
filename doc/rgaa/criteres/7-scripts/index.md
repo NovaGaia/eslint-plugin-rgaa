@@ -49,10 +49,10 @@ Dans chaque page web, les messages de statut sont-ils correctement restitués pa
 
 ### Glossaire RGAA
 - [Script](/rgaa/glossaire/script)
-- [Alternative (à script)](/rgaa/glossaire/alternative-(a-script))
+- [Alternative (à script)](/rgaa/glossaire/alternative-a-script)
 - [Changement de contexte](/rgaa/glossaire/changement-de-contexte)
 - [Message de statut](/rgaa/glossaire/message-de-statut)
-- [Compatible avec les technologies d'assistance](/rgaa/glossaire/compatible-avec-les-technologies-d'assistance)
+- [Compatible avec les technologies d'assistance](/rgaa/glossaire/compatible-avec-les-technologies-d-assistance)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 

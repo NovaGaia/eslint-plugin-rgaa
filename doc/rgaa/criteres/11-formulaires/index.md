@@ -75,8 +75,8 @@ La finalité d'un champ de saisie peut-elle être déduite pour faciliter le rem
 - [Formulaire](/rgaa/glossaire/formulaire)
 - [Champ de saisie de formulaire](/rgaa/glossaire/champ-de-saisie-de-formulaire)
 - [Étiquette de champ de formulaire](/rgaa/glossaire/etiquette-de-champ-de-formulaire)
-- [Bouton (formulaire)](/rgaa/glossaire/bouton-(formulaire))
-- [Contrôle de saisie (formulaire)](/rgaa/glossaire/controle-de-saisie-(formulaire))
+- [Bouton (formulaire)](/rgaa/glossaire/bouton-formulaire)
+- [Contrôle de saisie (formulaire)](/rgaa/glossaire/controle-de-saisie-formulaire)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 

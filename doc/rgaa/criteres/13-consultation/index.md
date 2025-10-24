@@ -69,9 +69,8 @@ Dans chaque page web, les fonctionnalités qui impliquent un mouvement de l'appa
 - [WCAG 2.1 - Timing](https://www.w3.org/WAI/WCAG21/quickref/#timing)
 
 ### Glossaire RGAA
-- [Version accessible (pour un document en téléchargement)](/rgaa/glossaire/version-accessible-(pour-un-document-en-telechargement))
-- [Contenu cryptique](/rgaa/glossaire/contenu-cryptique)
-- [Contrôle (contenu en mouvement ou clignotant)](/rgaa/glossaire/controle-(contenu-en-mouvement-ou-clignotant))
+- [Version accessible (pour un document en téléchargement)](/rgaa/glossaire/version-accessible-pour-un-document-en-telechargement)
+- [Contrôle (contenu en mouvement ou clignotant)](/rgaa/glossaire/controle-contenu-en-mouvement-ou-clignotant)
 - [Gestes complexes et gestes simples](/rgaa/glossaire/gestes-complexes-et-gestes-simples)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa

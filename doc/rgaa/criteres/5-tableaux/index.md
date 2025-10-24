@@ -61,7 +61,7 @@ Chaque tableau de mise en forme ne doit pas utiliser d'éléments propres aux ta
 - [Tableau de données complexe](/rgaa/glossaire/tableau-de-donnees-complexe)
 - [Tableau de mise en forme](/rgaa/glossaire/tableau-de-mise-en-forme)
 - [En-tête de colonne ou de ligne](/rgaa/glossaire/en-tete-de-colonne-ou-de-ligne)
-- [Résumé (de tableau)](/rgaa/glossaire/resume-(de-tableau))
+- [Résumé (de tableau)](/rgaa/glossaire/resume-de-tableau)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 

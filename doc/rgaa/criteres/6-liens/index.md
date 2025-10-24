@@ -39,9 +39,9 @@ Dans chaque page web, chaque lien a-t-il un intitulé ?
 
 ### Glossaire RGAA
 - [Lien](/rgaa/glossaire/lien)
-- [Intitulé (ou nom accessible) de lien](/rgaa/glossaire/intitule-(ou-nom-accessible)-de-lien)
+- [Intitulé (ou nom accessible) de lien](/rgaa/glossaire/intitule-ou-nom-accessible-de-lien)
 - [Intitulé visible](/rgaa/glossaire/intitule-visible)
-- [Lien dont la nature n'est pas évidente](/rgaa/glossaire/lien-dont-la-nature-n'est-pas-evidente)
+- [Lien dont la nature n'est pas évidente](/rgaa/glossaire/lien-dont-la-nature-n-est-pas-evidente)
 - [Contexte du lien](/rgaa/glossaire/contexte-du-lien)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa

@@ -75,7 +75,7 @@ Dans chaque page web, les contenus additionnels apparaissant via les styles CSS 
 - [WCAG 2.1 - Presentation](https://www.w3.org/WAI/WCAG21/quickref/#presentation)
 
 ### Glossaire RGAA
-- [Présentation de l'information](/rgaa/glossaire/presentation-de-l'information)
+- [Présentation de l'information](/rgaa/glossaire/presentation-de-l-information)
 - [Feuille de style](/rgaa/glossaire/feuille-de-style)
 - [Contenu visible](/rgaa/glossaire/contenu-visible)
 - [Contenu caché](/rgaa/glossaire/contenu-cache)

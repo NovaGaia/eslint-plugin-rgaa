@@ -169,18 +169,6 @@ Le RGAA est organisé en **13 thématiques** couvrant tous les aspects de l'acce
 
 ## 📚 Ressources complémentaires
 
-### FAQ
-- [Qu'est-ce que le RGAA ?](faq/rgaa.md)
-- [Pour qui est le RGAA ?](faq/pour-qui.md)
-- [Quelles obligations ?](faq/quelles-obligations.md)
-- [Quels supports ?](faq/quels-supports.md)
-- [Quelle mention ?](faq/quelle-mention.md)
-- [Déclaration d'accessibilité](faq/declaration.md)
-- [Schéma pluriannuel](faq/schema-pluriannuel.md)
-- [Sanctions](faq/sanctions.md)
-- [Loi](faq/loi.md)
-- [Normes](faq/normes.md)
-- [Mobile](faq/mobile.md)
 
 ### Glossaire
 Le [glossaire](glossaire/) contient **119 définitions** des termes techniques utilisés dans le RGAA.

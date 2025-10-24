@@ -68,9 +68,9 @@ Dans chaque page web, les contenus additionnels apparaissant au survol, à la pr
 ### Glossaire RGAA
 - [Système de navigation](/rgaa/glossaire/systeme-de-navigation)
 - [Menu et barre de navigation](/rgaa/glossaire/menu-et-barre-de-navigation)
-- [Page « plan du site »](/rgaa/glossaire/page-«-plan-du-site-»)
-- [Moteur de recherche (interne à un site web)](/rgaa/glossaire/moteur-de-recherche-(interne-a-un-site-web))
-- [Liens d'évitement ou d'accès rapide](/rgaa/glossaire/liens-d'evitement-ou-d'acces-rapide)
+- [Page « plan du site »](/rgaa/glossaire/page-plan-du-site)
+- [Moteur de recherche (interne à un site web)](/rgaa/glossaire/moteur-de-recherche-interne-a-un-site-web)
+- [Liens d'évitement ou d'accès rapide](/rgaa/glossaire/liens-d-evitement-ou-d-acces-rapide)
 
 ## 🛠️ Utilisation avec eslint-plugin-rgaa
 
