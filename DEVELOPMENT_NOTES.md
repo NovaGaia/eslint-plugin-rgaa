@@ -259,6 +259,7 @@ pnpm release                   # Publier sur npm
 - **Build** : Intégrer `pnpm build` pour vérifier la compilation
 - **Test** : Intégrer `pnpm test` pour valider les tests
 - **Configuration ESLint** : Désactiver le linting sur les dossiers examples
+- **⚠️ IMPORTANT** : S'assurer que le lint ne bloque pas la CI à cause des examples (fichiers `-with-issues` qui contiennent volontairement des erreurs)
 
 ## Informations du projet
 
