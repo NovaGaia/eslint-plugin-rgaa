@@ -2,6 +2,7 @@ import {
   createReportDescriptor,
   getAttributeValue,
   hasAlternativeAttributes,
+  hasAlternativeAttributesForDecorative,
   hasAriaHidden,
   hasAttribute,
   hasEmptyAlt,
@@ -48,17 +49,91 @@ export const rgaa1_2: Rule.RuleModule = {
       'test5-canvas-decorative-has-alternative': 'Test 1.2.5 ÉCHEC : L\'image bitmap décorative <canvas> ne doit pas avoir d\'attributs d\'alternative textuelle',
       'test5-canvas-decorative-has-content': 'Test 1.2.5 ÉCHEC : L\'image bitmap décorative <canvas> ne doit pas avoir de contenu alternatif',
       'test6-embed-decorative-missing-aria-hidden': 'Test 1.2.6 ÉCHEC : L\'image embarquée décorative <embed> doit avoir l\'attribut aria-hidden="true"',
-      'test6-embed-decorative-has-alternative': 'Test 1.2.6 ÉCHEC : L\'image embarquée décorative <embed> ne doit pas avoir d\'attributs d\'alternative textuelle'
+      'test6-embed-decorative-has-alternative': 'Test 1.2.6 ÉCHEC : L\'image embarquée décorative <embed> ne doit pas avoir d\'attributs d\'alternative textuelle',
+      
+      // Avertissements pour aria-labelledby
+      'aria-labelledby-warning': 'RGAA 1.2 ATTENTION : L\'élément utilise aria-labelledby. Vérifiez manuellement que l\'élément référencé ne contient pas d\'alternative textuelle (image décorative).'
     }
   },
 
   create(context: Rule.RuleContext) {
     const documentationUrl = getCriterionDocumentationUrl('1-images/1.2');
 
+    // Fonction pour parser les commentaires RGAA dans le code source
+    const parseRgaaCommentFromSource = (node: any): 'decorative' | 'informative' | 'ignore' | null => {
+      const sourceCode = context.getSourceCode();
+      const nodeStart = node.range[0];
+      
+      // Chercher dans les 10 lignes précédentes
+      const lines = sourceCode.getText().split('\n');
+      const nodeLine = sourceCode.getLocFromIndex(nodeStart).line;
+      
+      for (let i = Math.max(0, nodeLine - 10); i < nodeLine; i++) {
+        const line = lines[i];
+        const rgaaMatch = line.match(/\/\*\s*eslint-rgaa:\s*(decorative|informative|ignore)\s*\*\//);
+        if (rgaaMatch) {
+          return rgaaMatch[1] as 'decorative' | 'informative' | 'ignore';
+        }
+      }
+      
+      return null;
+    };
+
+    // Fonction pour vérifier et signaler les éléments avec aria-labelledby
+    const checkAriaLabelledBy = (node: any) => {
+      if (hasAttribute(node, 'aria-labelledby')) {
+        // Ne générer l'avertissement que si l'élément n'a pas d'autres alternatives
+        const hasOtherAlternatives = hasAttribute(node, 'alt') ||
+                                    hasAttribute(node, 'aria-label') ||
+                                    hasAttribute(node, 'title');
+
+        if (!hasOtherAlternatives) {
+          context.report({
+            node,
+            messageId: 'aria-labelledby-warning',
+            data: {
+              rgaaCriterion: '1.2',
+              documentationUrl
+            }
+          });
+        }
+      }
+    };
+
     return {
       JSXElement(node: any) {
+        // Vérifier d'abord les commentaires RGAA
+        const rgaaComment = parseRgaaCommentFromSource(node);
+        if (rgaaComment === 'informative' || rgaaComment === 'ignore') {
+          return; // Ignorer les images marquées comme informatives ou à ignorer
+        }
+        // Seules les images explicitement marquées comme décoratives sont traitées par RGAA 1.2
+        if (rgaaComment !== 'decorative') {
+          return; // Par défaut, les images sont informatives (RGAA 1.1)
+        }
+
+        // Vérifier et signaler les éléments avec aria-labelledby
+        checkAriaLabelledBy(node);
         // Test 1 : Images <img> décoratives
         if (isHtmlTag(node, 'img')) {
+          // Si marquée comme décorative par commentaire, vérifier qu'elle est correctement marquée
+          if (rgaaComment === 'decorative') {
+            const hasEmptyAltAttr = hasEmptyAlt(node);
+            const hasAriaHiddenAttr = hasAriaHidden(node);
+            const hasRolePresentationAttr = hasRolePresentation(node);
+            const hasRoleNoneAttr = hasRoleNone(node);
+            
+            if (!hasEmptyAltAttr && !hasAriaHiddenAttr && !hasRolePresentationAttr && !hasRoleNoneAttr) {
+              context.report(createReportDescriptor(
+                node,
+                'Test 1.2.1 ÉCHEC : L\'image décorative <img> doit être correctement marquée (alt="" ou aria-hidden="true" ou role="presentation")',
+                '1.2',
+                documentationUrl
+              ));
+              return;
+            }
+          }
+          
           // Une image est considérée comme décorative si :
           // 1. Elle n'a pas d'attributs d'alternative (aria-labelledby, aria-label, title)
           // 2. OU elle a alt="" (explicitement décorative)
@@ -68,7 +143,7 @@ export const rgaa1_2: Rule.RuleModule = {
           const hasAriaHiddenAttr = hasAriaHidden(node);
           const hasRolePresentationAttr = hasRolePresentation(node);
           const hasRoleNoneAttr = hasRoleNone(node);
-          const hasAlternativeAttrs = hasAlternativeAttributes(node);
+          const hasAlternativeAttrs = hasAlternativeAttributesForDecorative(node);
           
           // Déterminer si l'image est décorative
           // Pour les images <img>, vérifier aussi l'attribut alt
@@ -113,7 +188,7 @@ export const rgaa1_2: Rule.RuleModule = {
           const hasAriaHiddenAttr = hasAriaHidden(node);
           const hasRolePresentationAttr = hasRolePresentation(node);
           const hasRoleNoneAttr = hasRoleNone(node);
-          const hasAlternativeAttrs = hasAlternativeAttributes(node);
+          const hasAlternativeAttrs = hasAlternativeAttributesForDecorative(node);
           
           // Déterminer si la zone est décorative
           // Pour les zones <area>, vérifier aussi l'attribut alt
@@ -155,7 +230,7 @@ export const rgaa1_2: Rule.RuleModule = {
         // Test 3 : Images objet <object type="image/..."> décoratives
         if (isObjectImage(node)) {
           const hasAriaHiddenAttr = hasAriaHidden(node);
-          const hasAlternativeAttrs = hasAlternativeAttributes(node);
+          const hasAlternativeAttrs = hasAlternativeAttributesForDecorative(node);
           const hasContent = hasTextContent(node);
           
           // Déterminer si l'objet est décoratif
@@ -206,7 +281,7 @@ export const rgaa1_2: Rule.RuleModule = {
         // Test 4 : Images vectorielles <svg> décoratives
         if (isSvgTag(node)) {
           const hasAriaHiddenAttr = hasAriaHidden(node);
-          const hasAlternativeAttrs = hasAlternativeAttributes(node);
+          const hasAlternativeAttrs = hasAlternativeAttributesForDecorative(node);
           const hasTitleDesc = hasSvgTitleOrDesc(node);
           const hasTitleAttr = hasTitleAttribute(node);
           
@@ -273,7 +348,7 @@ export const rgaa1_2: Rule.RuleModule = {
         // Test 5 : Images bitmap <canvas> décoratives
         if (isCanvasTag(node)) {
           const hasAriaHiddenAttr = hasAriaHidden(node);
-          const hasAlternativeAttrs = hasAlternativeAttributes(node);
+          const hasAlternativeAttrs = hasAlternativeAttributesForDecorative(node);
           const hasContent = hasTextContent(node);
           
           // Déterminer si le canvas est décoratif
@@ -327,7 +402,7 @@ export const rgaa1_2: Rule.RuleModule = {
         // Test 6 : Images embarquées <embed type="image/..."> décoratives
         if (isEmbedImage(node)) {
           const hasAriaHiddenAttr = hasAriaHidden(node);
-          const hasAlternativeAttrs = hasAlternativeAttributes(node);
+          const hasAlternativeAttrs = hasAlternativeAttributesForDecorative(node);
           
           // Déterminer si l'embed est décoratif
           const isDecorative = hasAriaHiddenAttr || !hasAlternativeAttrs;

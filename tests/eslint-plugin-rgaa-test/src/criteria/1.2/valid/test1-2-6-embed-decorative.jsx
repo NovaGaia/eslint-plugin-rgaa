@@ -5,9 +5,11 @@ const Test1_2_6_EmbedDecorative = () => {
   return (
     <div>
       {/* Embed décoratif avec aria-hidden="true" */}
+      {/* eslint-rgaa: decorative */}
       <embed type="image/svg+xml" src="decoration.svg" aria-hidden="true" />
       
       {/* Embed décoratif avec aria-hidden="true" */}
+      {/* eslint-rgaa: decorative */}
       <embed type="image/png" src="separator.png" aria-hidden="true" />
     </div>
   );

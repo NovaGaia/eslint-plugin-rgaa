@@ -1,167 +1,115 @@
 # Documentation eslint-plugin-rgaa
 
-Ce dossier contient la documentation complète du plugin ESLint pour la validation des critères RGAA.
+Bienvenue dans la documentation du plugin ESLint RGAA. Cette documentation vous accompagne dans l'utilisation et la configuration du plugin pour valider l'accessibilité de vos applications web selon le Référentiel Général d'Amélioration de l'Accessibilité (RGAA).
 
-## 📁 Structure
+## 📚 Guides et tutoriels
 
-```
-/rgaa/
-├── .vitepress/
-│   └── config.mjs          # Configuration VitePress
-├── index.md                # Page d'accueil
-├── guide.md                # Guide d'utilisation
-├── contributing.md          # Guide de contribution
-└── rgaa/                   # Documentation RGAA
-    ├── index.md            # Vue d'ensemble RGAA
-    ├── criteres/           # Critères RGAA (106 critères)
-    │   ├── 1.1/
-    │   │   ├── index.md    # Critère principal
-    │   │   ├── annexe.md   # Références WCAG
-    │   │   └── tests/      # Tests du critère
-    │   └── ...
-    ├── faq/                # Questions fréquentes
-    └── glossaire/          # Glossaire (119 termes)
-```
+### [Guide d'utilisation](guide.md)
+Guide complet pour installer, configurer et utiliser le plugin ESLint RGAA dans vos projets.
 
-## 🚀 Démarrage rapide
+### [Système de commentaires RGAA](commentaires-rgaa.md)
+Documentation détaillée du système de commentaires spéciaux pour contrôler le statut des images (décorative/informative).
 
-### Prérequis
-- Node.js 20+
-- pnpm
+## 🎯 Critères RGAA implémentés
 
-### Installation
-```bash
-# Installer les dépendances
-pnpm install
+### Images et médias
 
-# Lancer le serveur de développement
-pnpm run docs:serve
-```
+#### [Critère 1.1 - Images porteuses d'information](rgaa/criteres/1-images/1.1/index.md)
+**Question** : Chaque image porteuse d'information a-t-elle une alternative textuelle ?
 
-### Scripts disponibles
+**Règle ESLint** : `rgaa-html/rgaa-1-1`
 
-```bash
-# Développement
-pnpm run docs:serve          # Serveur de développement
-pnpm run docs:watch          # Mode watch
-pnpm run docs:build          # Build de production
+#### [Critère 1.2 - Images décoratives](rgaa/criteres/1-images/1.2/index.md)
+**Question** : Chaque image décorative est-elle correctement ignorée par les technologies d'assistance ?
 
-# Traitement de la documentation RGAA
-pnpm run docs:setup          # Script complet (recommandé)
-pnpm run docs:add-titles     # Ajouter les titres
-pnpm run docs:include-tests  # Inclure les tests
-pnpm run docs:include-annexes # Inclure les annexes
-pnpm run docs:fix-links      # Corriger les liens WCAG
-pnpm run docs:fix-internal-links # Corriger les liens internes
+**Règle ESLint** : `rgaa-html/rgaa-1-2`
 
-# Publication
-pnpm run docs:publish        # Publier sur GitHub Pages
+#### [Critère 1.3 - Pertinence des alternatives textuelles](rgaa/criteres/1-images/1.3/index.md)
+**Question** : Pour chaque image porteuse d'information ayant une alternative textuelle, cette alternative est-elle pertinente ?
+
+**Règle ESLint** : `rgaa-html/rgaa-1-3`
+
+## 🔧 Configuration
+
+### Configuration de base
+```javascript
+// .eslintrc.js
+module.exports = {
+  plugins: ['rgaa-html'],
+  rules: {
+    'rgaa-html/rgaa-1-1': 'error',
+    'rgaa-html/rgaa-1-2': 'error',
+    'rgaa-html/rgaa-1-3': 'warn'
+  }
+};
 ```
 
-## 🔄 Mise à jour de la documentation
+### Configuration avancée
+```javascript
+// eslint.config.js (ESLint 9+)
+const rgaaHtmlPlugin = require('eslint-plugin-rgaa-html');
 
-### Processus automatique
-
-1. **Placez les nouveaux fichiers** dans la structure appropriée
-2. **Exécutez le script complet** :
-   ```bash
-   pnpm run docs:setup
-   ```
-3. **Testez la documentation** :
-   ```bash
-   pnpm run docs:serve
-   ```
-4. **Publiez** :
-   ```bash
-   pnpm run docs:publish
-   ```
-
-### Scripts individuels
-
-Si vous devez traiter seulement certains aspects :
-
-```bash
-# Traitement sélectif
-pnpm run docs:add-titles         # Titres seulement
-pnpm run docs:include-tests      # Tests seulement
-pnpm run docs:include-annexes   # Annexes seulement
-pnpm run docs:fix-links          # Liens WCAG seulement
-pnpm run docs:fix-internal-links # Liens internes seulement
+module.exports = [
+  {
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
+    plugins: {
+      'rgaa-html': rgaaHtmlPlugin,
+    },
+    rules: {
+      'rgaa-html/rgaa-1-1': 'error',
+      'rgaa-html/rgaa-1-2': 'error',
+      'rgaa-html/rgaa-1-3': ['warn', { minLength: 25 }]
+    },
+  },
+];
 ```
 
-## 📝 Structure des fichiers RGAA
+## 💬 Système de commentaires
 
-### Critères
-Chaque critère doit contenir :
-- `index.md` : Critère principal avec frontmatter YAML
-- `annexe.md` : Références WCAG et techniques
-- `tests/` : Dossier avec les tests (1.md, 2.md, etc.)
+Le plugin supporte un système de commentaires spéciaux pour contrôler explicitement le statut des images :
 
-### Glossaire
-Les termes du glossaire sont des fichiers markdown avec :
-- Frontmatter YAML contenant le titre
-- Contenu de la définition
-- Liens internes vers d'autres termes
+```jsx
+// Image informative par défaut
+<img src="chart.png" alt="Graphique des ventes" />
 
-### FAQ
-Questions fréquentes organisées par thème.
+// Image décorative forcée
+{/* eslint-rgaa: decorative */}
+<img src="decoration.png" alt="" role="presentation" />
 
-## 🛠️ Développement
+// Image temporairement ignorée
+{/* eslint-rgaa: ignore - À corriger plus tard */}
+<img src="old-logo.png" alt="Logo legacy" />
+```
 
-### Configuration VitePress
+**Types de commentaires :**
+- `eslint-rgaa: decorative` - Image décorative (vérifiée par RGAA 1.2)
+- `eslint-rgaa: informative` - Image informative (vérifiée par RGAA 1.1 et 1.3)
+- `eslint-rgaa: ignore` - Image ignorée temporairement
 
-Le fichier `.vitepress/config.mjs` contient :
-- Navigation principale
-- Sidebar structurée
-- Configuration du thème
-- Liens sociaux
-- Recherche locale
+## 🧪 Tests et exemples
 
-### Ajout de nouveaux critères
+### Exemples IDE
+Des exemples JSX/TSX sont disponibles dans `tests/eslint-plugin-rgaa-ide/examples/` pour tester le plugin directement dans votre IDE.
 
-1. Créez le dossier du critère : `/rgaa/rgaa/criteres/X.Y/`
-2. Ajoutez les fichiers : `index.md`, `annexe.md`, `tests/`
-3. Exécutez : `pnpm run docs:setup`
-4. Vérifiez avec : `pnpm run docs:serve`
+### Tests automatisés
+Le plugin inclut une suite de tests complète organisée par critère RGAA.
 
-### Ajout de nouveaux termes au glossaire
+## 📖 Ressources externes
 
-1. Créez le fichier : `/rgaa/rgaa/glossaire/terme.md`
-2. Exécutez : `pnpm run docs:fix-internal-links`
-3. Vérifiez les liens internes
-
-## 🐛 Dépannage
-
-### Problèmes courants
-
-1. **Scripts échouent** : Vérifiez la structure des fichiers
-2. **Liens cassés** : Relancez les scripts de correction
-3. **Tests manquants** : Vérifiez les dossiers `tests/`
-4. **Annexes manquantes** : Vérifiez les fichiers `annexe.md`
-
-### Logs et débogage
-
-Les scripts fournissent des logs détaillés :
-- ✅ **Succès** : Fichiers traités avec succès
-- ℹ️ **Info** : Fichiers ignorés (déjà traités ou sans contenu)
-- ❌ **Erreur** : Problèmes rencontrés avec détails
-
-## 📚 Ressources
-
-- [Guide de contribution](contributing.md)
-- [Configuration VitePress](https://vitepress.dev/)
-- [RGAA Officiel](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/)
-- [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/)
+- [Documentation RGAA officielle](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/)
+- [Guide d'accessibilité web MDN](https://developer.mozilla.org/fr/docs/Web/Accessibility)
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 
 ## 🤝 Contribution
 
-Pour contribuer à la documentation :
+Pour contribuer au projet :
 
-1. Lisez le [guide de contribution](contributing.md)
-2. Suivez le processus de mise à jour décrit ci-dessus
-3. Testez vos modifications avec `pnpm run docs:serve`
-4. Soumettez une Pull Request
+1. Fork le repository
+2. Créer une branche feature
+3. Ajouter les tests pour le nouveau critère
+4. Commiter les changements
+5. Créer une Pull Request
 
----
+## 📄 Licence
 
-*Cette documentation est maintenue par la communauté eslint-plugin-rgaa pour faciliter l'implémentation des critères d'accessibilité dans vos projets web.*
+MIT

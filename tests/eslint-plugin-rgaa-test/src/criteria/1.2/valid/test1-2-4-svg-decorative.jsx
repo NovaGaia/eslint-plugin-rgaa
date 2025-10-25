@@ -5,11 +5,13 @@ const Test1_2_4_SvgDecorative = () => {
   return (
     <div>
       {/* SVG décoratif avec aria-hidden="true" */}
+      {/* eslint-rgaa: decorative */}
       <svg aria-hidden="true">
         <circle cx="50" cy="50" r="40" fill="red" />
       </svg>
       
       {/* SVG décoratif avec aria-hidden="true" et éléments title/desc vides */}
+      {/* eslint-rgaa: decorative */}
       <svg aria-hidden="true">
         <title></title>
         <desc></desc>
@@ -17,6 +19,7 @@ const Test1_2_4_SvgDecorative = () => {
       </svg>
       
       {/* SVG décoratif avec aria-hidden="true" et sans attributs title */}
+      {/* eslint-rgaa: decorative */}
       <svg aria-hidden="true">
         <path d="M10 10 L20 20" stroke="black" />
       </svg>

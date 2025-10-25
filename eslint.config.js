@@ -1,9 +1,10 @@
 const typescriptEslint = require('@typescript-eslint/eslint-plugin');
 const typescriptParser = require('@typescript-eslint/parser');
+const rgaaHtmlPlugin = require('./libs/eslint-plugin-rgaa-html/dist/index.js');
 
 module.exports = [
   {
-    files: ['**/*.js', '**/*.ts', '**/*.tsx'],
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
     languageOptions: {
       ecmaVersion: 2020,
       sourceType: 'module',
@@ -23,10 +24,12 @@ module.exports = [
         module: 'readonly',
         require: 'readonly',
         exports: 'readonly',
+        React: 'readonly',
       },
     },
     plugins: {
       '@typescript-eslint': typescriptEslint,
+      'rgaa-html': rgaaHtmlPlugin,
     },
     rules: {
       // Règles TypeScript
@@ -35,10 +38,13 @@ module.exports = [
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
       
-      // Règles de base
-      'no-console': 'warn',
-      'no-unused-vars': 'off', // Désactivé car géré par TypeScript
-      'prefer-const': 'error',
-    },
-  },
+      // Configuration RGAA par défaut
+      ...rgaaHtmlPlugin.configs.recommended.rules,
+      
+      // Configuration personnalisable
+      'rgaa-html/rgaa-1-1': 'error',   // Présence d'alternatives (bloquant)
+      'rgaa-html/rgaa-1-2': 'error',   // Images décoratives (bloquant)
+      'rgaa-html/rgaa-1-3': 'warn',    // Pertinence des alternatives (suggestion)
+    }
+  }
 ];

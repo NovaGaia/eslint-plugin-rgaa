@@ -3,14 +3,14 @@ const Test1_7_EmbedValidAlternatives = () => {
   return (
     <div>
       {/* Embed avec role="img" et aria-label - OK */}
-      <embed src="image.png" type="image/png" role="img" aria-label="Image PNG" />
+      <embed src="image.png" type="image/png" role="img" aria-label="Image PNG représentant un diagramme de flux" />
       
-      {/* Embed avec role="img" et aria-labelledby - OK */}
-      <embed src="image.png" type="image/png" role="img" aria-labelledby="embed-title" />
-      <span id="embed-title">Image PNG</span>
+      {/* Embed avec role="img" et aria-labelledby + aria-label - OK */}
+      <embed src="image.png" type="image/png" role="img" aria-label="Image PNG représentant un diagramme de flux de données" aria-labelledby="embed-title" />
+      <span id="embed-title">Image PNG représentant un diagramme de flux</span>
       
       {/* Embed avec role="img" et title - OK */}
-      <embed src="image.png" type="image/png" role="img" title="Image PNG" />
+      <embed src="image.png" type="image/png" role="img" title="Image PNG représentant un diagramme de flux" />
     </div>
   );
 };

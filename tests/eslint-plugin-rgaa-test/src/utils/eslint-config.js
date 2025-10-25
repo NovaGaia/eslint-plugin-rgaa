@@ -41,6 +41,7 @@ module.exports = [
       // Règles RGAA
       'rgaa-html/rgaa-1-1': 'error',
       'rgaa-html/rgaa-1-2': 'error',
+      'rgaa-html/rgaa-1-3': 'error', // Traité comme erreur pour les tests
     },
   },
 ];

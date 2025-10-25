@@ -4,10 +4,12 @@
 
 export interface RGAAConfig {
   documentationBaseUrl: string;
+  minAlternativeLength: number;
 }
 
 export const defaultRGAAConfig: RGAAConfig = {
-  documentationBaseUrl: 'https://novagaia.github.io/eslint-plugin-rgaa'
+  documentationBaseUrl: 'https://novagaia.github.io/eslint-plugin-rgaa',
+  minAlternativeLength: 25
 };
 
 /**
@@ -22,5 +24,12 @@ export function getCriterionDocumentationUrl(criterion: string, config: RGAAConf
  */
 export function getRGAA1_1DocumentationUrl(config: RGAAConfig = defaultRGAAConfig): string {
   return getCriterionDocumentationUrl('1-images/1.1', config);
+}
+
+/**
+ * Obtient l'URL de documentation pour le critère 1.3
+ */
+export function getRGAA1_3DocumentationUrl(config: RGAAConfig = defaultRGAAConfig): string {
+  return getCriterionDocumentationUrl('1-images/1.3', config);
 }
 

@@ -13,8 +13,8 @@ const Test1_5_SvgValidAlternatives = () => {
         <circle cx="50" cy="50" r="40" fill="red" />
       </svg>
       
-      {/* SVG avec role="img" et aria-labelledby - OK */}
-      <svg width="100" height="100" role="img" aria-labelledby="chart-title">
+      {/* SVG avec role="img" et aria-labelledby + aria-label - OK */}
+      <svg width="100" height="100" role="img" aria-label="Graphique vectoriel représentant l'évolution des ventes mensuelles" aria-labelledby="chart-title">
         <circle cx="50" cy="50" r="40" fill="red" />
       </svg>
       <span id="chart-title">Graphique en cercle rouge</span>

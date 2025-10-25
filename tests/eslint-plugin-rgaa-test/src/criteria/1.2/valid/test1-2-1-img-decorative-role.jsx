@@ -5,12 +5,15 @@ const Test1_2_1_ImgDecorativeRole = () => {
   return (
     <div>
       {/* Image décorative avec role="presentation" */}
+      {/* eslint-rgaa: decorative */}
       <img src="decoration.png" role="presentation" />
       
       {/* Image décorative avec role="none" */}
+      {/* eslint-rgaa: decorative */}
       <img src="separator.png" role="none" />
       
       {/* Image décorative avec role="presentation" et aria-hidden="true" */}
+      {/* eslint-rgaa: decorative */}
       <img src="banner.jpg" role="presentation" aria-hidden="true" />
     </div>
   );

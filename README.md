@@ -27,6 +27,73 @@ Ce projet contient aussi une documentation sur le RGAA et sur ce linter. Elle pe
 pnpm install
 ```
 
+## Configuration
+
+Le plugin RGAA fournit une configuration par défaut avec des niveaux de règle appropriés :
+
+```javascript
+const rgaaHtmlPlugin = require('eslint-plugin-rgaa-html');
+
+module.exports = [
+  {
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
+    plugins: {
+      'rgaa-html': rgaaHtmlPlugin,
+    },
+    rules: {
+      // Configuration RGAA par défaut
+      ...rgaaHtmlPlugin.configs.recommended.rules,
+    }
+  }
+];
+```
+
+### Niveaux par défaut
+
+- **RGAA 1.1** (Présence d'alternatives) : `error` - Bloquant
+- **RGAA 1.2** (Images décoratives) : `error` - Bloquant  
+- **RGAA 1.3** (Pertinence des alternatives) : `warn` - Suggestion
+
+### Surcharge locale
+
+Vous pouvez surcharger les niveaux de règle dans votre projet :
+
+```javascript
+module.exports = [
+  {
+    // ... configuration de base
+    rules: {
+      ...rgaaHtmlPlugin.configs.recommended.rules,
+      
+      // Surcharges locales
+      'rgaa-html/rgaa-1-1': 'error',   // Garde le niveau error
+      'rgaa-html/rgaa-1-2': 'warn',    // Change de error à warn
+      'rgaa-html/rgaa-1-3': 'off',     // Désactive complètement
+    }
+  }
+];
+```
+
+### Options personnalisées
+
+```javascript
+module.exports = [
+  {
+    // ... configuration de base
+    rules: {
+      ...rgaaHtmlPlugin.configs.recommended.rules,
+      
+      // Configuration avec options personnalisées
+      'rgaa-html/rgaa-1-3': ['warn', { 
+        minLength: 30,  // Longueur minimale personnalisée (défaut: 25)
+      }],
+    }
+  }
+];
+```
+
+Voir [CONFIGURATION.md](./CONFIGURATION.md) pour plus de détails.
+
 ## Développement
 
 ### Build des libraries
@@ -97,6 +164,32 @@ module.exports = {
 <img src="separator.png" alt="" role="presentation">
 ```
 
+### Système de commentaires RGAA
+
+Le plugin supporte un système de commentaires spéciaux pour contrôler explicitement le statut des images :
+
+```jsx
+// Image informative par défaut (pas de commentaire)
+<img src="chart.png" alt="Graphique des ventes" />
+
+// Image décorative forcée par commentaire
+{/* eslint-rgaa: decorative */}
+<img src="decoration.png" alt="" role="presentation" />
+
+// Image temporairement ignorée
+{/* eslint-rgaa: ignore - À corriger plus tard */}
+<img src="old-logo.png" alt="Logo legacy" />
+```
+
+**Types de commentaires disponibles :**
+- `eslint-rgaa: decorative` - Image décorative (vérifiée par RGAA 1.2)
+- `eslint-rgaa: informative` - Image informative (vérifiée par RGAA 1.1 et 1.3)
+- `eslint-rgaa: ignore` - Image ignorée temporairement
+
+**Principe :** Par défaut, toutes les images sont considérées comme informatives sauf indication contraire.
+
+Voir la [documentation complète des commentaires](doc/commentaires-rgaa.md) pour plus de détails.
+
 ## Configuration
 
 ### Configuration Flat (ESLint 9+)
@@ -141,7 +234,13 @@ npx eslint . --config eslint.config.js
 
 ## Documentation
 
-La documentation complète du RGAA est disponible dans le dossier `doc/` et sera publiée sur GitHub Pages.
+La documentation complète du plugin est disponible dans le dossier `doc/` :
+
+- **[Guide d'utilisation](doc/guide.md)** - Installation, configuration et utilisation
+- **[Système de commentaires](doc/commentaires-rgaa.md)** - Contrôle explicite du statut des images
+- **[Critères RGAA](doc/rgaa/)** - Documentation détaillée des critères implémentés
+
+La documentation sera publiée sur GitHub Pages.
 
 ## Tests
 

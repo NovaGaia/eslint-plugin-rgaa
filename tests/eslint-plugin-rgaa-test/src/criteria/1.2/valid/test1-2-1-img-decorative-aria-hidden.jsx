@@ -5,9 +5,13 @@ const Test1_2_1_ImgDecorativeAriaHidden = () => {
   return (
     <div>
       {/* Image décorative avec aria-hidden="true" */}
+      {/* eslint-rgaa: decorative */}
+      {/* eslint-rgaa: decorative */}
       <img src="decoration.png" aria-hidden="true" />
       
       {/* Image décorative avec aria-hidden="true" et role="presentation" */}
+      {/* eslint-rgaa: decorative */}
+      {/* eslint-rgaa: decorative */}
       <img src="separator.png" aria-hidden="true" role="presentation" />
     </div>
   );

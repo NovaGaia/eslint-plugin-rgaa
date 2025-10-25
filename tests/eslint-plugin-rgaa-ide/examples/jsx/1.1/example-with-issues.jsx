@@ -8,23 +8,26 @@ const ExampleRGAA1_1WithIssues = () => {
       
       {/* Test 1.1.1 - Images img sans alternatives */}
       <div>
-        <h2>Images img sans alternatives</h2>
+        <h2>Images &lt;img /&gt; sans alternatives</h2>
         {/* Erreur : Image sans attribut alt */}
         <img src="logo.png" />
         
-        {/* Erreur : Image avec alt vide (devrait être décorative) */}
+        {/* Erreur : Image avec alt vide mais pas marquée comme décorative */}
         <img src="chart.png" alt="" />
         
-        {/* Erreur : Image avec alt trop long */}
-        <img src="banner.jpg" alt="Ceci est un graphique très détaillé qui montre l'évolution des ventes sur une période de 12 mois avec des données précises pour chaque mois et des analyses approfondies des tendances du marché" />
         
         {/* Erreur : Image avec alt contenant seulement des espaces */}
         <img src="icon.svg" alt="   " />
+        
+        
+        {/* Erreur : Image informative par défaut mais sans alternative */}
+        <img src="chart.png" />
       </div>
       
       {/* Test 1.1.2 - Zones area sans alternatives */}
       <div>
-        <h2>Zones area sans alternatives</h2>
+        <h2>Zones &lt;area /&gt; sans alternatives</h2>
+        <img src="navigation.png" useMap="#navigation-map" />
         <map name="navigation-map">
           {/* Erreur : Zone sans alt */}
           <area shape="rect" coords="0,0,100,50" href="/home" />
@@ -36,7 +39,7 @@ const ExampleRGAA1_1WithIssues = () => {
       
       {/* Test 1.1.3 - Boutons image sans alternatives */}
       <div>
-        <h2>Boutons image sans alternatives</h2>
+        <h2>Boutons &lt;input type="image" /&gt; sans alternatives</h2>
         {/* Erreur : Bouton image sans alt */}
         <input type="image" src="submit.png" />
         
@@ -46,7 +49,7 @@ const ExampleRGAA1_1WithIssues = () => {
       
       {/* Test 1.1.5 - Images vectorielles svg sans alternatives */}
       <div>
-        <h2>Images vectorielles svg sans alternatives</h2>
+        <h2>Images vectorielles &lt;svg&gt; sans alternatives</h2>
         {/* Erreur : SVG sans role="img" */}
         <svg>
           <circle cx="50" cy="50" r="40" fill="red" />
@@ -60,7 +63,7 @@ const ExampleRGAA1_1WithIssues = () => {
       
       {/* Test 1.1.6 - Images objet object sans alternatives */}
       <div>
-        <h2>Images objet object sans alternatives</h2>
+        <h2>Images objet &lt;object /&gt; sans alternatives</h2>
         {/* Erreur : Object sans role="img" */}
         <object type="image/svg+xml" data="diagram.svg" />
         
@@ -70,7 +73,7 @@ const ExampleRGAA1_1WithIssues = () => {
       
       {/* Test 1.1.7 - Images embarquées embed sans alternatives */}
       <div>
-        <h2>Images embarquées embed sans alternatives</h2>
+        <h2>Images embarquées &lt;embed /&gt; sans alternatives</h2>
         {/* Erreur : Embed sans role="img" */}
         <embed type="image/svg+xml" src="icon.svg" />
         
@@ -80,7 +83,7 @@ const ExampleRGAA1_1WithIssues = () => {
       
       {/* Test 1.1.8 - Images bitmap canvas sans alternatives */}
       <div>
-        <h2>Images bitmap canvas sans alternatives</h2>
+        <h2>Images bitmap &lt;canvas&gt; sans alternatives</h2>
         {/* Erreur : Canvas sans role="img" et sans contenu alternatif */}
         <canvas></canvas>
         

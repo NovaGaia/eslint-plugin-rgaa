@@ -5,11 +5,13 @@ const Test1_2_5_CanvasDecorativeHasContent = () => {
   return (
     <div>
       {/* Canvas décoratif avec contenu alternatif - ne devrait pas avoir de contenu */}
+      {/* eslint-rgaa: decorative */}
       <canvas aria-hidden="true">
         Contenu alternatif
       </canvas>
       
       {/* Canvas décoratif avec contenu alternatif - ne devrait pas avoir de contenu */}
+      {/* eslint-rgaa: decorative */}
       <canvas width="100" height="100" aria-hidden="true">
         <p>Description de l'image</p>
       </canvas>

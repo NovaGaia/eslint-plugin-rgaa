@@ -233,6 +233,62 @@ export function hasSvgTitle(node: any): boolean {
 }
 
 /**
+ * Parse les commentaires ESLint RGAA pour déterminer le statut d'une image
+ * @param node - Le nœud JSX à analyser
+ * @returns 'decorative' | 'informative' | 'ignore' | null
+ */
+export function parseRgaaComment(node: any): 'decorative' | 'informative' | 'ignore' | null {
+  if (!node || !node.parent) {
+    return null;
+  }
+
+  // Chercher dans les commentaires précédents
+  const siblings = node.parent.children || [];
+  const nodeIndex = siblings.indexOf(node);
+  
+  // Parcourir les nœuds précédents pour trouver des commentaires
+  for (let i = nodeIndex - 1; i >= 0; i--) {
+    const sibling = siblings[i];
+    
+    // Vérifier les commentaires JSX (JSXExpressionContainer avec JSXEmptyExpression)
+    if (sibling.type === 'JSXExpressionContainer' && 
+        sibling.expression && 
+        sibling.expression.type === 'JSXEmptyExpression') {
+      // C'est un commentaire JSX vide, continuer
+      continue;
+    }
+    
+    // Vérifier les nœuds de texte qui peuvent contenir des commentaires
+    if (sibling.type === 'JSXText') {
+      const text = sibling.value;
+      const rgaaMatch = text.match(/\/\*\s*eslint-rgaa:\s*(decorative|informative|ignore)\s*\*\//);
+      if (rgaaMatch) {
+        return rgaaMatch[1] as 'decorative' | 'informative' | 'ignore';
+      }
+    }
+    
+    // Vérifier les commentaires JSX dans les expressions
+    if (sibling.type === 'JSXExpressionContainer' && 
+        sibling.expression && 
+        sibling.expression.type === 'Literal' &&
+        typeof sibling.expression.value === 'string') {
+      const text = sibling.expression.value;
+      const rgaaMatch = text.match(/\/\*\s*eslint-rgaa:\s*(decorative|informative|ignore)\s*\*\//);
+      if (rgaaMatch) {
+        return rgaaMatch[1] as 'decorative' | 'informative' | 'ignore';
+      }
+    }
+    
+    // Si on trouve un autre élément JSX, arrêter la recherche
+    if (sibling.type === 'JSXElement') {
+      break;
+    }
+  }
+  
+  return null;
+}
+
+/**
  * Vérifie si un élément area a un attribut href (zone cliquable)
  */
 export function hasHrefAttribute(node: any): boolean {
@@ -275,9 +331,38 @@ export function hasEmptyAlt(node: any): boolean {
  * Vérifie si un élément a des attributs d'alternative textuelle
  */
 export function hasAlternativeAttributes(node: any): boolean {
-  return hasAttribute(node, 'aria-labelledby') || 
-         hasAttribute(node, 'aria-label') || 
-         hasAttribute(node, 'title');
+  const hasStandardAttrs = hasAttribute(node, 'alt') ||
+                          hasAttribute(node, 'aria-labelledby') || 
+                          hasAttribute(node, 'aria-label') || 
+                          hasAttribute(node, 'title');
+  
+  // Pour les SVG (avec ou sans role="img"), vérifier aussi les éléments <title> enfants
+  if (isSvgTag(node) && node.children) {
+    return hasStandardAttrs || hasSvgTitleOrDesc(node);
+  }
+  
+  // Pour les Canvas, vérifier aussi le contenu textuel
+  if (isCanvasTag(node) && node.children) {
+    return hasStandardAttrs || hasTextContent(node);
+  }
+  
+  return hasStandardAttrs;
+}
+
+/**
+ * Vérifie si un élément a des attributs d'alternative textuelle (pour les images décoratives)
+ * Exclut alt="" qui est correct pour les images décoratives
+ */
+export function hasAlternativeAttributesForDecorative(node: any): boolean {
+  const hasAriaLabelledBy = hasAttribute(node, 'aria-labelledby');
+  const hasAriaLabel = hasAttribute(node, 'aria-label');
+  const hasTitle = hasAttribute(node, 'title');
+  
+  // Pour les images <img>, vérifier aussi l'attribut alt (mais pas alt="")
+  const altValue = getAttributeValue(node, 'alt');
+  const hasNonEmptyAlt = hasAttribute(node, 'alt') && altValue !== '';
+  
+  return hasAriaLabelledBy || hasAriaLabel || hasTitle || hasNonEmptyAlt;
 }
 
 /**
@@ -297,6 +382,59 @@ export function hasSvgTitleOrDesc(node: any): boolean {
     }
     return false;
   });
+}
+
+/**
+ * Obtient le contenu de l'élément <title> d'un SVG
+ */
+export function getSvgTitleContent(node: any): string | null {
+  if (!isSvgTag(node) || !node.children) {
+    return null;
+  }
+
+  for (const child of node.children) {
+    if (child.type === 'JSXElement' && child.openingElement && child.openingElement.name) {
+      const tagName = child.openingElement.name.name;
+      if (tagName === 'title') {
+        if (child.children) {
+          for (const titleChild of child.children) {
+            if (titleChild.type === 'JSXText' && titleChild.value.trim().length > 0) {
+              return titleChild.value.trim();
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  return null;
+}
+
+/**
+ * Obtient le contenu textuel d'un Canvas
+ */
+export function getCanvasTextContent(node: any): string | null {
+  if (!isCanvasTag(node) || !node.children) {
+    return null;
+  }
+
+  const textParts: string[] = [];
+  
+  const extractText = (child: any) => {
+    if (child.type === 'JSXText' && child.value.trim().length > 0) {
+      textParts.push(child.value.trim());
+    } else if (child.type === 'JSXElement' && child.children) {
+      for (const grandChild of child.children) {
+        extractText(grandChild);
+      }
+    }
+  };
+
+  for (const child of node.children) {
+    extractText(child);
+  }
+  
+  return textParts.length > 0 ? textParts.join(' ') : null;
 }
 
 /**
@@ -349,6 +487,18 @@ export function isDecorativeImage(node: any): boolean {
     return false;
   }
 
+  // Vérifier d'abord les commentaires ESLint RGAA
+  const rgaaComment = parseRgaaComment(node);
+  if (rgaaComment === 'decorative') {
+    return true;
+  }
+  if (rgaaComment === 'informative') {
+    return false;
+  }
+  if (rgaaComment === 'ignore') {
+    return true; // Ignorer = traiter comme décorative pour éviter les erreurs
+  }
+
   // Vérifier les conditions de marquage décoratif
   const hasEmptyAltAttr = hasEmptyAlt(node);
   const hasAriaHiddenAttr = hasAriaHidden(node);
@@ -364,9 +514,9 @@ export function isDecorativeImage(node: any): boolean {
     
     // Une image <img> ou <area> est décorative si :
     // 1. Elle a des attributs de marquage décoratif explicites (aria-hidden, role="presentation", role="none")
-    // 2. OU elle a alt="" (explicitement décorative)
-    // 3. OU elle n'a pas d'attribut alt ET pas d'autres attributs d'alternative (considérée comme décorative par défaut)
-    return hasAriaHiddenAttr || hasRolePresentationAttr || hasRoleNoneAttr || hasEmptyAltAttr || (!hasNonEmptyAlt && !hasAlternativeAttrs);
+    // 2. OU elle n'a pas d'attribut alt ET pas d'autres attributs d'alternative (considérée comme décorative par défaut)
+    // 3. Une image avec alt="" SANS marquage décoratif explicite est considérée comme INFORMATIVE (erreur RGAA 1.1)
+    return hasAriaHiddenAttr || hasRolePresentationAttr || hasRoleNoneAttr || (!hasNonEmptyAlt && !hasAlternativeAttrs);
   }
 
   // Pour les autres types d'images (SVG, object, canvas, embed)
@@ -391,6 +541,82 @@ export function isDecorativeImage(node: any): boolean {
   
   // Pour les autres types (object, embed)
   return hasEmptyAltAttr || hasAriaHiddenAttr || hasRolePresentationAttr || hasRoleNoneAttr || !hasAlternativeAttrs;
+}
+
+/**
+ * Vérifie si une alternative textuelle est trop courte
+ */
+export function isAlternativeTooShort(node: any, minLength: number = 25): boolean {
+  // Vérifier les attributs d'alternative
+  const altValue = getAttributeValue(node, 'alt');
+  const titleValue = getAttributeValue(node, 'title');
+  const ariaLabelValue = getAttributeValue(node, 'aria-label');
+  
+  // Vérifier les alternatives dans les SVG
+  if (isSvgTag(node)) {
+    const titleDesc = hasSvgTitleOrDesc(node);
+    if (titleDesc) {
+      // Pour les SVG, vérifier la longueur du contenu des éléments <title>
+      const svgTitleContent = getSvgTitleContent(node);
+      if (svgTitleContent && svgTitleContent.length < minLength) {
+        return true; // Alternative trop courte
+      }
+      return false; // Alternative suffisamment longue
+    }
+  }
+  
+  // Vérifier le contenu alternatif des Canvas
+  if (isCanvasTag(node)) {
+    const hasContent = hasTextContent(node);
+    if (hasContent) {
+      // Pour les Canvas, vérifier la longueur du contenu textuel
+      const canvasTextContent = getCanvasTextContent(node);
+      if (canvasTextContent && canvasTextContent.length < minLength) {
+        return true; // Alternative trop courte
+      }
+      return false; // Alternative suffisamment longue
+    }
+  }
+  
+  // Vérifier les attributs d'alternative
+  const alternatives = [altValue, titleValue, ariaLabelValue].filter(Boolean);
+  
+  return alternatives.some(alt => alt && alt.length < minLength);
+}
+
+/**
+ * Obtient la valeur de l'alternative textuelle la plus courte
+ */
+export function getShortestAlternative(node: any): string | null {
+  const altValue = getAttributeValue(node, 'alt');
+  const titleValue = getAttributeValue(node, 'title');
+  const ariaLabelValue = getAttributeValue(node, 'aria-label');
+  
+  let alternatives = [altValue, titleValue, ariaLabelValue].filter(Boolean);
+  
+  // Pour les SVG (avec ou sans role="img"), vérifier aussi les éléments <title> enfants
+  if (isSvgTag(node) && node.children) {
+    const svgTitleContent = getSvgTitleContent(node);
+    if (svgTitleContent) {
+      alternatives.push(svgTitleContent);
+    }
+  }
+  
+  // Pour les Canvas, vérifier aussi le contenu textuel
+  if (isCanvasTag(node) && node.children) {
+    const canvasTextContent = getCanvasTextContent(node);
+    if (canvasTextContent) {
+      alternatives.push(canvasTextContent);
+    }
+  }
+  
+  if (alternatives.length === 0) {
+    return null;
+  }
+  
+  return alternatives.reduce((shortest, current) => 
+    current && current.length < (shortest?.length || Infinity) ? current : shortest
+  );
 }
 
 /**

@@ -4,8 +4,9 @@ import React from 'react';
 const Test1_2_4_SvgDecorativeHasTitleAttr = () => {
   return (
     <div>
-      {/* SVG décoratif avec attribut title - ne devrait pas avoir d'attributs title */}
-      <svg aria-hidden="true" title="Décoration">
+      {/* SVG décoratif avec balise title - ne devrait pas avoir de balise title */}
+      <svg aria-hidden="true">
+        <title>Décoration</title>
         <circle cx="50" cy="50" r="40" fill="red" />
       </svg>
       

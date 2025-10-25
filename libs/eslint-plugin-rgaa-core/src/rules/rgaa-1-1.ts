@@ -78,20 +78,69 @@ export const rgaa1_1: Rule.RuleModule = {
       // Test 8 - Images bitmap <canvas>
       test8_missingRole: 'Test 1.1.8 ÉCHEC : L\'image bitmap <canvas> doit avoir l\'attribut role="img".',
       test8_missingAlt: 'Test 1.1.8 ÉCHEC : L\'image bitmap <canvas> doit avoir une alternative textuelle (aria-label ou aria-labelledby).',
-      test8_missingAlternative: 'Test 1.1.8 ÉCHEC : L\'image bitmap <canvas> doit avoir un contenu alternatif ou être suivie d\'un lien permettant d\'accéder à un contenu alternatif.'
+      test8_missingAlternative: 'Test 1.1.8 ÉCHEC : L\'image bitmap <canvas> doit avoir un contenu alternatif ou être suivie d\'un lien permettant d\'accéder à un contenu alternatif.',
+      
+      // Avertissements pour aria-labelledby
+      'aria-labelledby-warning': 'RGAA 1.1 ATTENTION : L\'élément utilise aria-labelledby. Vérifiez manuellement que l\'élément référencé contient une alternative textuelle.'
     }
   },
   
   create(context: Rule.RuleContext) {
     const documentationUrl = getRGAA1_1DocumentationUrl();
+
+    // Fonction pour parser les commentaires RGAA dans le code source
+    const parseRgaaCommentFromSource = (node: any): 'decorative' | 'informative' | 'ignore' | null => {
+      const sourceCode = context.getSourceCode();
+      const nodeStart = node.range[0];
+      
+      // Chercher dans les 10 lignes précédentes
+      const lines = sourceCode.getText().split('\n');
+      const nodeLine = sourceCode.getLocFromIndex(nodeStart).line;
+      
+      for (let i = Math.max(0, nodeLine - 10); i < nodeLine; i++) {
+        const line = lines[i];
+        const rgaaMatch = line.match(/\/\*\s*eslint-rgaa:\s*(decorative|informative|ignore)\s*\*\//);
+        if (rgaaMatch) {
+          return rgaaMatch[1] as 'decorative' | 'informative' | 'ignore';
+        }
+      }
+      
+      return null;
+    };
+
+    // Fonction pour vérifier et signaler les éléments avec aria-labelledby
+    const checkAriaLabelledBy = (node: any) => {
+      if (hasAttribute(node, 'aria-labelledby')) {
+        // Ne générer l'avertissement que si l'élément n'a pas d'autres alternatives
+        const hasOtherAlternatives = hasAttribute(node, 'alt') ||
+                                    hasAttribute(node, 'aria-label') ||
+                                    hasAttribute(node, 'title');
+
+        if (!hasOtherAlternatives) {
+          context.report({
+            node,
+            messageId: 'aria-labelledby-warning',
+            data: {
+              rgaaCriterion: '1.1',
+              documentationUrl
+            }
+          });
+        }
+      }
+    };
     
     return {
       JSXElement(node: any) {
-        // Vérifier si l'élément est une image décorative (RGAA 1.2)
-        // Si c'est le cas, ne pas appliquer RGAA 1.1
-        if (isDecorativeImage(node)) {
-          return;
+        // Vérifier d'abord les commentaires RGAA
+        const rgaaComment = parseRgaaCommentFromSource(node);
+        if (rgaaComment === 'decorative' || rgaaComment === 'ignore') {
+          return; // Ignorer les images marquées comme décoratives ou à ignorer
         }
+        // Par défaut, toutes les images sont considérées comme informatives
+        // (pas besoin de vérifier isDecorativeImage)
+
+        // Vérifier et signaler les éléments avec aria-labelledby
+        checkAriaLabelledBy(node);
         // Test 5 : Images vectorielles <svg> (doit être avant le test role="img")
         if (isSvgTag(node)) {
           // Vérifier que le SVG a role="img"
