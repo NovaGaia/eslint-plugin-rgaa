@@ -1,0 +1,43 @@
+{
+  "name": "eslint-plugin-rgaa-test",
+  "version": "0.1.0",
+  "description": "Test library for RGAA accessibility linting rules",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && cp -r src/*.js dist/ 2>/dev/null || true && cp -r src/utils/*.js dist/utils/ 2>/dev/null || true",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "node dist/run-tests.js",
+    "test:verbose": "node dist/run-tests.js --verbose",
+    "test:criterion": "node dist/run-tests.js --criterion",
+    "add-criterion": "node dist/add-criterion.js"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "accessibility",
+    "rgaa",
+    "a11y",
+    "linter",
+    "test",
+    "france"
+  ],
+  "author": "Renaud Heluin",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "dependencies": {
+    "eslint": "^9.0.0",
+    "eslint-plugin-rgaa-core": "workspace:^",
+    "eslint-plugin-rgaa-html": "workspace:^"
+  },
+  "peerDependencies": {
+    "eslint": ">=9.0.0"
+  }
+}

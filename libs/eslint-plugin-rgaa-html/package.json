@@ -1,0 +1,39 @@
+{
+  "name": "eslint-plugin-rgaa-html",
+  "version": "0.1.0",
+  "description": "HTML linter for RGAA accessibility rules",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "accessibility",
+    "rgaa",
+    "a11y",
+    "linter",
+    "html",
+    "france"
+  ],
+  "author": "Renaud Heluin",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "dependencies": {
+    "eslint": "^9.0.0",
+    "eslint-plugin-rgaa-core": "workspace:*"
+  },
+  "peerDependencies": {
+    "eslint": ">=9.0.0"
+  }
+}
+

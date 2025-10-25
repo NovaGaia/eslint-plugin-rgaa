@@ -1,0 +1,29 @@
+{
+  "name": "eslint-plugin-rgaa-tests",
+  "version": "0.1.0",
+  "description": "Test workspace for RGAA accessibility linting rules",
+  "private": true,
+  "scripts": {
+    "test": "node -e \"const { TestRunner } = require('eslint-plugin-rgaa-test'); new TestRunner({ configPath: './eslint-plugin-rgaa-test/src/utils/eslint-config.js' }).runAllTests();\"",
+    "test:verbose": "node -e \"const { TestRunner } = require('eslint-plugin-rgaa-test'); new TestRunner({ verbose: true, configPath: './eslint-plugin-rgaa-test/src/utils/eslint-config.js' }).runAllTests();\"",
+    "test:criterion": "node -e \"const { TestRunner } = require('eslint-plugin-rgaa-test'); const criterion = process.argv[1]; new TestRunner().testCriterion(criterion);\"",
+    "add-criterion": "node -e \"const { execSync } = require('child_process'); execSync('node eslint-plugin-rgaa-test/dist/add-criterion.js ' + process.argv.slice(2).join(' '), { stdio: 'inherit' });\"",
+    "build": "echo 'No build needed for tests'",
+    "clean": "echo 'No clean needed for tests'"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "accessibility",
+    "rgaa",
+    "a11y",
+    "linter",
+    "test",
+    "france"
+  ],
+  "author": "Renaud Heluin",
+  "license": "MIT",
+  "dependencies": {
+    "eslint-plugin-rgaa-test": "workspace:^"
+  }
+}
