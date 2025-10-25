@@ -28,7 +28,7 @@
   "scripts": {
     "test": "node -e \"const { TestRunner } = require('./tests/eslint-plugin-rgaa-test/dist/index.js'); new TestRunner().runAllTests();\"",
     "test:verbose": "node -e \"const { TestRunner } = require('./tests/eslint-plugin-rgaa-test/dist/index.js'); new TestRunner({ verbose: true }).runAllTests();\"",
-    "test:criterion": "node -e \"const { TestRunner } = require('./tests/eslint-plugin-rgaa-test/dist/index.js'); const criterion = process.argv[2]; new TestRunner().testCriterion(criterion);\"",
+    "test:criterion": "node -e \"const { TestRunner } = require('./tests/eslint-plugin-rgaa-test/dist/index.js'); const criterion = process.argv[process.argv.length - 1]; new TestRunner().testCriterion(criterion);\"",
     "test:1.1": "npm run test:criterion 1.1",
     "test:ide": "cd tests/eslint-plugin-rgaa-ide/examples && npx eslint jsx/example-with-issues.jsx",
     "test:workspace": "cd tests && npm run test",

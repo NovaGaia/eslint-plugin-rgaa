@@ -78,7 +78,7 @@ class TestRunner {
   }
 
   testCriterion(criterion) {
-    const criterionPath = path.join(__dirname, '..', '..', 'src', 'criteria', criterion);
+    const criterionPath = path.join(process.cwd(), 'tests', 'eslint-plugin-rgaa-test', 'src', 'criteria', criterion);
     
     if (!fs.existsSync(criterionPath)) {
       this.log(`Critère ${criterion} non trouvé`, 'error');
