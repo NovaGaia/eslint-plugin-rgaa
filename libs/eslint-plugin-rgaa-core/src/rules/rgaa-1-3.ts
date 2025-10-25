@@ -7,6 +7,7 @@ import {
   isAlternativeTooShort,
   isAreaTag,
   isCanvasTag,
+  isCorrectlyMarkedDecorative,
   isDecorativeImage,
   isEmbedImage,
   isHtmlTag,
@@ -132,8 +133,11 @@ export const rgaa1_3: Rule.RuleModule = {
         if (rgaaComment === 'decorative' || rgaaComment === 'ignore') {
           return; // Ignorer les images marquées comme décoratives ou à ignorer
         }
-        // Par défaut, toutes les images sont considérées comme informatives
-        // (pas besoin de vérifier isDecorativeImage)
+        
+        // Vérifier si l'image est décorative par ses attributs
+        if (isDecorativeImage(context, node, isCorrectlyMarkedDecorative)) {
+          return; // Ignorer les images décoratives
+        }
         
         // Vérifier et signaler les éléments avec aria-labelledby
         checkAriaLabelledBy(node);

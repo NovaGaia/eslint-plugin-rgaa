@@ -1,4 +1,121 @@
-export * from './rules';
-export * from './types';
-export * from './utils';
+/**
+ * Point d'entrée principal pour les utilitaires RGAA
+ * Réexporte toutes les fonctions organisées par catégorie
+ */
 
+// Fonctions communes (manipulation de nœuds et attributs)
+export * from './common';
+
+// Fonctions pour la thématique 1 - Images (RGAA 1.1, 1.2, 1.3)
+// Inclut les fonctions pour images, SVG et Canvas
+export * from './image-theme-utils';
+
+// Gestion des commentaires RGAA
+export * from './rgaa-comments';
+
+// Configuration des URLs de documentation
+export const DOCUMENTATION_URLS = {
+  '1.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/1-images/1.1/',
+  '1.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/1-images/1.2/',
+  '1.3': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/1-images/1.3/',
+  '2.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/2-cadres/2.1/',
+  '2.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/2-cadres/2.2/',
+  '3.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/3-couleurs/3.1/',
+  '3.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/3-couleurs/3.2/',
+  '3.3': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/3-couleurs/3.3/',
+  '4.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.1/',
+  '4.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.2/',
+  '4.3': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.3/',
+  '4.4': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.4/',
+  '4.5': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.5/',
+  '4.6': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.6/',
+  '4.7': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.7/',
+  '4.8': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.8/',
+  '4.9': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.9/',
+  '4.10': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.10/',
+  '4.11': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.11/',
+  '4.12': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.12/',
+  '4.13': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/4-multimedia/4.13/',
+  '5.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/5-tableaux/5.1/',
+  '5.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/5-tableaux/5.2/',
+  '5.3': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/5-tableaux/5.3/',
+  '5.4': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/5-tableaux/5.4/',
+  '5.5': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/5-tableaux/5.5/',
+  '5.6': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/5-tableaux/5.6/',
+  '5.7': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/5-tableaux/5.7/',
+  '5.8': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/5-tableaux/5.8/',
+  '6.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/6-liens/6.1/',
+  '6.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/6-liens/6.2/',
+  '7.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/7-scripts/7.1/',
+  '7.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/7-scripts/7.2/',
+  '7.3': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/7-scripts/7.3/',
+  '7.4': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/7-scripts/7.4/',
+  '7.5': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/7-scripts/7.5/',
+  '8.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/8-elements-obligatoires/8.1/',
+  '8.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/8-elements-obligatoires/8.2/',
+  '8.3': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/8-elements-obligatoires/8.3/',
+  '8.4': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/8-elements-obligatoires/8.4/',
+  '8.5': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/8-elements-obligatoires/8.5/',
+  '8.6': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/8-elements-obligatoires/8.6/',
+  '8.7': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/8-elements-obligatoires/8.7/',
+  '8.8': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/8-elements-obligatoires/8.8/',
+  '8.9': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/8-elements-obligatoires/8.9/',
+  '8.10': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/8-elements-obligatoires/8.10/',
+  '9.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/9-structure/9.1/',
+  '9.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/9-structure/9.2/',
+  '9.3': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/9-structure/9.3/',
+  '9.4': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/9-structure/9.4/',
+  '10.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.1/',
+  '10.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.2/',
+  '10.3': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.3/',
+  '10.4': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.4/',
+  '10.5': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.5/',
+  '10.6': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.6/',
+  '10.7': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.7/',
+  '10.8': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.8/',
+  '10.9': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.9/',
+  '10.10': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.10/',
+  '10.11': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.11/',
+  '10.12': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.12/',
+  '10.13': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.13/',
+  '10.14': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/10-presentation/10.14/',
+  '11.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.1/',
+  '11.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.2/',
+  '11.3': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.3/',
+  '11.4': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.4/',
+  '11.5': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.5/',
+  '11.6': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.6/',
+  '11.7': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.7/',
+  '11.8': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.8/',
+  '11.9': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.9/',
+  '11.10': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.10/',
+  '11.11': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.11/',
+  '11.12': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.12/',
+  '11.13': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/11-formulaires/11.13/',
+  '12.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/12-navigation/12.1/',
+  '12.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/12-navigation/12.2/',
+  '12.3': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/12-navigation/12.3/',
+  '12.4': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/12-navigation/12.4/',
+  '12.5': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/12-navigation/12.5/',
+  '12.6': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/12-navigation/12.6/',
+  '12.7': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/12-navigation/12.7/',
+  '12.8': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/12-navigation/12.8/',
+  '12.9': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/12-navigation/12.9/',
+  '12.10': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/12-navigation/12.10/',
+  '12.11': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/12-navigation/12.11/',
+  '13.1': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.1/',
+  '13.2': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.2/',
+  '13.3': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.3/',
+  '13.4': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.4/',
+  '13.5': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.5/',
+  '13.6': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.6/',
+  '13.7': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.7/',
+  '13.8': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.8/',
+  '13.9': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.9/',
+  '13.10': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.10/',
+  '13.11': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.11/',
+  '13.12': 'https://novagaia.github.io/eslint-plugin-rgaa/rgaa/criteres/13-consultation/13.12/'
+} as const;
+
+// Configuration par défaut pour la longueur minimale des alternatives
+export const DEFAULT_MIN_ALTERNATIVE_LENGTH = 25;

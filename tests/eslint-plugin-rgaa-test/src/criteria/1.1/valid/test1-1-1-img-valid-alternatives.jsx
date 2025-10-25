@@ -15,11 +15,9 @@ const Test1_1_ImgValidAlternatives = () => {
       {/* Image avec title - OK */}
       <img src="logo.png" title="Logo de l'entreprise avec un design moderne et professionnel" />
       
-      {/* Image décorative avec alt vide - OK */}
-      <img src="decoration.png" alt="" role="presentation" />
-      
-      {/* Image décorative avec role="none" - OK */}
-      <img src="decoration.png" alt="" role="none" />
+      {/* Image avec aria-labelledby + aria-label - OK */}
+      <img src="logo.png" aria-labelledby="logo-desc" aria-label="Description détaillée du logo de l'entreprise" />
+      <span id="logo-desc">Description détaillée du logo de l'entreprise</span>
     </div>
   );
 };

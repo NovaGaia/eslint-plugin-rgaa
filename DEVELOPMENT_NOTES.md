@@ -12,11 +12,66 @@
 - **`doc/`** : Documentation RGAA et guide utilisateur (versionnée)
 - **`doc-init/`** : Fichiers sources pour les scripts de documentation (ignoré par Git)
 
+### Organisation des utilitaires (Refactorisation 2024)
+Le fichier `utils.ts` (642 lignes) a été refactorisé en modules thématiques :
+
+- **`common.ts`** : Fonctions communes (manipulation de nœuds, attributs, types)
+- **`image-theme-utils.ts`** : Toutes les fonctions liées à la thématique 1 RGAA (images, SVG, Canvas)
+- **`rgaa-comments.ts`** : Gestion des commentaires ESLint RGAA
+- **`index.ts`** : Point d'entrée unifié avec réexport de toutes les fonctions
+
+**Avantages :**
+- Organisation respectant la structure RGAA par thématiques
+- Code plus maintenable et extensible
+- Séparation claire des responsabilités
+- Documentation complète en français
+- Compatibilité préservée via index.ts
+
+## Logique des critères RGAA (IMPORTANT)
+
+### Principe fondamental
+Les critères RGAA se basent sur les **attributs HTML réels**, pas sur les commentaires ESLint.
+
+### Rôle des commentaires `eslint-rgaa:`
+- **Rôle** : Aide au développeur pour clarifier l'intention
+- **Pas un critère de test** : Le linter se base sur les attributs HTML réels
+- **Utile pour** : Éviter les faux positifs quand l'intention n'est pas claire
+
+### Logique des critères :
+- **RGAA 1.1** : Images **informatives** (par défaut) → Vérifie présence d'alternatives
+- **RGAA 1.2** : Images **décoratives** (détectées par attributs) → Vérifie marquage correct
+- **RGAA 1.3** : Images **informatives** (par défaut) → Vérifie pertinence des alternatives
+
+### Détection des images décoratives :
+- `alt=""` + `role="presentation"` → Décorative
+- `alt=""` + `role="none"` → Décorative  
+- `aria-hidden="true"` → Décorative
+- `alt=""` seul → Informative (erreur RGAA 1.1)
+
+**NE JAMAIS** utiliser les commentaires comme critère de test, seulement comme aide contextuelle.
+
+### Optimisation RGAA 1.3 - Éviter les faux positifs
+**Principe** : RGAA 1.3 ne s'applique qu'aux alternatives avec du contenu réel.
+
+**Logique implémentée** :
+- RGAA 1.3 ne s'applique qu'aux alternatives avec **au moins 1 caractère non vide** (après trim)
+- `alt=""` → RGAA 1.1 seulement (pas de warning RGAA 1.3)
+- `alt="   "` → RGAA 1.1 seulement (pas de warning RGAA 1.3)
+- `alt="OK"` → RGAA 1.1 + RGAA 1.3 (warning si < 25 chars)
+- `alt="Description détaillée..."` → RGAA 1.1 + RGAA 1.3 (OK)
+
+**Avantages** :
+- Élimination des warnings redondants
+- Séparation claire des responsabilités entre RGAA 1.1 et 1.3
+- Cohérence avec la logique RGAA officielle
+
 ### Outils utilisés
 - **Turbo** : Build et tests
-- **pnpm** : Gestionnaire de packages (UNIQUEMENT pnpm)
+- **pnpm@8.15.0** : Gestionnaire de packages (UNIQUEMENT pnpm)
 - **TypeScript** : Développement
 - **ESLint 9** : Configuration flat
+- **VitePress** : Documentation et site web
+- **Node.js** : >=20.0.0 requis
 
 ## Règles RGAA implémentées
 
@@ -128,26 +183,45 @@ module.exports = [
 
 ### Commandes importantes
 ```bash
-# Build complet
-pnpm build
-
-# Tests complets
-pnpm test
+# Build et tests
+pnpm build                     # Build complet
+pnpm test                      # Tests complets
+pnpm test:verbose              # Tests avec détails
+pnpm test:1.1                  # Test spécifique RGAA 1.1
+pnpm test:ide                  # Test des exemples IDE
+pnpm test:workspace            # Test du workspace
 
 # Test d'un critère spécifique
+pnpm test:criterion 1.1        # Test d'un critère spécifique
 node tests/eslint-plugin-rgaa-test/dist/index.js test:criterion 1.1
 
-# Test IDE
+# Test IDE manuel
 cd tests/eslint-plugin-rgaa-ide/examples
 npx eslint jsx/1.1/example-with-issues.jsx
 
-# Documentation
+# Documentation - Migration de structure
 pnpm docs:migrate              # Migrer l'ancienne structure vers la nouvelle
+pnpm docs:restore              # Restaurer l'ancienne structure (si nécessaire)
 pnpm docs:test-migration       # Tester que la migration fonctionne
-pnpm docs:setup               # Appliquer tous les traitements de documentation
-pnpm docs:restore             # Restaurer l'ancienne structure (si nécessaire)
-pnpm docs:integrate-content   # Intégrer le contenu complet des tests et annexes
+
+# Documentation - Traitement de contenu
+pnpm docs:add-titles           # Ajouter des titres aux pages
+pnpm docs:include-tests        # Intégrer les tests dans les pages
+pnpm docs:include-annexes      # Intégrer les annexes dans les pages
+pnpm docs:fix-links            # Corriger les liens WCAG
+pnpm docs:fix-internal-links   # Corriger les liens internes
+pnpm docs:add-titles-faq-glossaire # Ajouter des titres FAQ/glossaire
+pnpm docs:setup                # Appliquer tous les traitements de documentation
+
+# Documentation - Intégration complète
+pnpm docs:integrate-content    # Intégrer le contenu complet des tests et annexes
 pnpm docs:validate-integration # Valider que l'intégration est identique au backup
+
+# Documentation - VitePress
+pnpm docs:build                # Build de la documentation
+pnpm docs:serve                # Serveur de développement
+pnpm docs:watch                # Mode watch
+pnpm docs:publish              # Publication sur GitHub Pages
 ```
 
 ## Prochaines étapes possibles
@@ -157,6 +231,23 @@ pnpm docs:validate-integration # Valider que l'intégration est identique au bac
 3. **Tests de performance** (optimisation des règles)
 4. **Intégration CI/CD** (validation automatique)
 5. **Plugin VSCode** (interface graphique)
+
+## Informations du projet
+
+### Métadonnées
+- **Nom** : eslint-plugin-rgaa
+- **Version** : 0.1.0
+- **Auteur** : Renaud Heluin
+- **Licence** : MIT
+- **Repository** : https://github.com/renaudheluin/eslint-plugin-rgaa.git
+- **Homepage** : https://renaudheluin.github.io/eslint-plugin-rgaa/
+- **Mots-clés** : eslint, eslintplugin, accessibility, rgaa, a11y, linter, france
+
+### Configuration technique
+- **Node.js** : >=20.0.0
+- **Package Manager** : pnpm@8.15.0
+- **Workspaces** : libs/*
+- **Peer Dependencies** : eslint >=9.0.0
 
 ## Fichiers de configuration importants
 
@@ -176,6 +267,13 @@ pnpm docs:validate-integration # Valider que l'intégration est identique au bac
 ### Scripts d'intégration
 - `scripts/integrate-content.js` : Intègre le contenu complet des tests et annexes dans les pages de critères
 - `scripts/validate-integration.js` : Valide que l'intégration est identique au backup
+
+### Scripts de test spécialisés
+- `test:verbose` : Tests avec détails complets
+- `test:criterion` : Test d'un critère spécifique
+- `test:1.1`, `test:1.2`, `test:1.3` : Raccourcis pour les critères
+- `test:ide` : Test des exemples IDE
+- `test:workspace` : Test du workspace complet
 
 ### Workflow de documentation
 1. **Modifier** les fichiers dans `doc-init/` (structure plate)

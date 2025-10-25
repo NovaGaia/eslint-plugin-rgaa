@@ -10,10 +10,12 @@ import {
   hasRoleNone,
   hasRolePresentation,
   hasSvgTitleOrDesc,
+  hasSvgTitleOrDescWithContent,
   hasTextContent,
   hasTitleAttribute,
   isAreaTag,
   isCanvasTag,
+  isCorrectlyMarkedDecorative,
   isEmbedImage,
   isHtmlTag,
   isObjectImage,
@@ -107,9 +109,13 @@ export const rgaa1_2: Rule.RuleModule = {
         if (rgaaComment === 'informative' || rgaaComment === 'ignore') {
           return; // Ignorer les images marquées comme informatives ou à ignorer
         }
-        // Seules les images explicitement marquées comme décoratives sont traitées par RGAA 1.2
-        if (rgaaComment !== 'decorative') {
-          return; // Par défaut, les images sont informatives (RGAA 1.1)
+        
+        // Déterminer si l'image est décorative
+        const isDecorativeByComment = rgaaComment === 'decorative';
+        const isDecorativeByAttrs = isCorrectlyMarkedDecorative(node);
+        
+        if (!isDecorativeByComment && !isDecorativeByAttrs) {
+          return; // Image informative, traitée par RGAA 1.1
         }
 
         // Vérifier et signaler les éléments avec aria-labelledby
@@ -282,7 +288,7 @@ export const rgaa1_2: Rule.RuleModule = {
         if (isSvgTag(node)) {
           const hasAriaHiddenAttr = hasAriaHidden(node);
           const hasAlternativeAttrs = hasAlternativeAttributesForDecorative(node);
-          const hasTitleDesc = hasSvgTitleOrDesc(node);
+          const hasTitleDesc = hasSvgTitleOrDescWithContent(node);
           const hasTitleAttr = hasTitleAttribute(node);
           
           // Déterminer si le SVG est décoratif
