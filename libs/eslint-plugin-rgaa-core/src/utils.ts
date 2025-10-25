@@ -233,6 +233,167 @@ export function hasSvgTitle(node: any): boolean {
 }
 
 /**
+ * Vérifie si un élément area a un attribut href (zone cliquable)
+ */
+export function hasHrefAttribute(node: any): boolean {
+  return hasAttribute(node, 'href');
+}
+
+/**
+ * Vérifie si un élément a l'attribut aria-hidden="true"
+ */
+export function hasAriaHidden(node: any): boolean {
+  const ariaHidden = getAttributeValue(node, 'aria-hidden');
+  return ariaHidden === 'true';
+}
+
+/**
+ * Vérifie si un élément a l'attribut role="presentation"
+ */
+export function hasRolePresentation(node: any): boolean {
+  const roleValue = getAttributeValue(node, 'role');
+  return roleValue === 'presentation';
+}
+
+/**
+ * Vérifie si un élément a l'attribut role="none"
+ */
+export function hasRoleNone(node: any): boolean {
+  const roleValue = getAttributeValue(node, 'role');
+  return roleValue === 'none';
+}
+
+/**
+ * Vérifie si un élément a un attribut alt vide
+ */
+export function hasEmptyAlt(node: any): boolean {
+  const altValue = getAttributeValue(node, 'alt');
+  return altValue === '';
+}
+
+/**
+ * Vérifie si un élément a des attributs d'alternative textuelle
+ */
+export function hasAlternativeAttributes(node: any): boolean {
+  return hasAttribute(node, 'aria-labelledby') || 
+         hasAttribute(node, 'aria-label') || 
+         hasAttribute(node, 'title');
+}
+
+/**
+ * Vérifie si un SVG a des éléments title ou desc avec du contenu
+ */
+export function hasSvgTitleOrDesc(node: any): boolean {
+  if (!isSvgTag(node) || !node.children) {
+    return false;
+  }
+  
+  return node.children.some((child: any) => {
+    if (child.type === 'JSXElement' && child.openingElement && child.openingElement.name) {
+      const tagName = child.openingElement.name.name;
+      if (tagName === 'title' || tagName === 'desc') {
+        return hasTextContent(child);
+      }
+    }
+    return false;
+  });
+}
+
+/**
+ * Vérifie si un élément a des attributs title sur lui-même ou ses enfants
+ */
+export function hasTitleAttribute(node: any): boolean {
+  if (hasAttribute(node, 'title')) {
+    return true;
+  }
+  
+  // Vérifier les enfants pour les attributs title
+  if (node.children) {
+    return node.children.some((child: any) => {
+      if (child.type === 'JSXElement') {
+        return hasTitleAttribute(child);
+      }
+      return false;
+    });
+  }
+  
+  return false;
+}
+
+/**
+ * Vérifie si un élément est correctement marqué comme décoratif
+ */
+export function isCorrectlyMarkedDecorative(node: any): boolean {
+  // Vérifier qu'il n'a pas d'attributs d'alternative
+  if (hasAlternativeAttributes(node)) {
+    return false;
+  }
+
+  // Vérifier les conditions de marquage décoratif
+  const hasEmptyAltAttr = hasEmptyAlt(node);
+  const hasAriaHiddenAttr = hasAriaHidden(node);
+  const hasRolePresentationAttr = hasRolePresentation(node);
+  const hasRoleNoneAttr = hasRoleNone(node);
+
+  return hasEmptyAltAttr || hasAriaHiddenAttr || hasRolePresentationAttr || hasRoleNoneAttr;
+}
+
+/**
+ * Vérifie si un élément est une image décorative
+ * (utilisé par RGAA 1.1 pour ignorer les images décoratives)
+ */
+export function isDecorativeImage(node: any): boolean {
+  // Vérifier si c'est un élément d'image
+  if (!isHtmlTag(node, 'img') && !isAreaTag(node) && !isSvgTag(node) && 
+      !isObjectImage(node) && !isCanvasTag(node) && !isEmbedImage(node)) {
+    return false;
+  }
+
+  // Vérifier les conditions de marquage décoratif
+  const hasEmptyAltAttr = hasEmptyAlt(node);
+  const hasAriaHiddenAttr = hasAriaHidden(node);
+  const hasRolePresentationAttr = hasRolePresentation(node);
+  const hasRoleNoneAttr = hasRoleNone(node);
+  const hasAlternativeAttrs = hasAlternativeAttributes(node);
+
+  // Pour les images <img> et <area>, vérifier aussi l'attribut alt
+  if (isHtmlTag(node, 'img') || isAreaTag(node)) {
+    const altValue = getAttributeValue(node, 'alt');
+    const hasAlt = hasAttribute(node, 'alt');
+    const hasNonEmptyAlt = hasAlt && altValue !== '';
+    
+    // Une image <img> ou <area> est décorative si :
+    // 1. Elle a des attributs de marquage décoratif explicites (aria-hidden, role="presentation", role="none")
+    // 2. OU elle a alt="" (explicitement décorative)
+    // 3. OU elle n'a pas d'attribut alt ET pas d'autres attributs d'alternative (considérée comme décorative par défaut)
+    return hasAriaHiddenAttr || hasRolePresentationAttr || hasRoleNoneAttr || hasEmptyAltAttr || (!hasNonEmptyAlt && !hasAlternativeAttrs);
+  }
+
+  // Pour les autres types d'images (SVG, object, canvas, embed)
+  // Une image est décorative si :
+  // 1. Elle a des attributs de marquage décoratif
+  // 2. OU elle n'a pas d'attributs d'alternative (considérée comme décorative par défaut)
+  
+  // Pour les SVG, vérifier aussi les éléments <title>
+  if (isSvgTag(node)) {
+    const hasSvgTitle = hasSvgTitleOrDesc(node);
+    const hasAnyAlternative = hasAlternativeAttrs || hasSvgTitle;
+    
+    return hasEmptyAltAttr || hasAriaHiddenAttr || hasRolePresentationAttr || hasRoleNoneAttr || !hasAnyAlternative;
+  }
+  
+  // Pour les Canvas, vérifier aussi le contenu alternatif
+  if (isCanvasTag(node)) {
+    const hasCanvasContent = hasTextContent(node);
+    const hasAnyAlternative = hasAlternativeAttrs || hasCanvasContent;
+    return hasEmptyAltAttr || hasAriaHiddenAttr || hasRolePresentationAttr || hasRoleNoneAttr || !hasAnyAlternative;
+  }
+  
+  // Pour les autres types (object, embed)
+  return hasEmptyAltAttr || hasAriaHiddenAttr || hasRolePresentationAttr || hasRoleNoneAttr || !hasAlternativeAttrs;
+}
+
+/**
  * Create a report descriptor for RGAA violations
  */
 export function createReportDescriptor(

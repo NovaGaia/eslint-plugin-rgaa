@@ -9,6 +9,7 @@ import {
   hasValidAlternative,
   isAreaTag,
   isCanvasTag,
+  isDecorativeImage,
   isEmbedImage,
   isHtmlTag,
   isInputImage,
@@ -86,6 +87,11 @@ export const rgaa1_1: Rule.RuleModule = {
     
     return {
       JSXElement(node: any) {
+        // Vérifier si l'élément est une image décorative (RGAA 1.2)
+        // Si c'est le cas, ne pas appliquer RGAA 1.1
+        if (isDecorativeImage(node)) {
+          return;
+        }
         // Test 5 : Images vectorielles <svg> (doit être avant le test role="img")
         if (isSvgTag(node)) {
           // Vérifier que le SVG a role="img"
