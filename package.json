@@ -44,6 +44,8 @@
     "docs:fix-links": "node scripts/fix-wcag-links.js",
     "docs:fix-internal-links": "node scripts/fix-internal-links.js",
     "docs:add-titles-faq-glossaire": "node scripts/add-titles-faq-glossaire.js",
+    "docs:integrate-content": "node scripts/integrate-content.js",
+    "docs:validate-integration": "node scripts/validate-integration.js",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "clean": "turbo run clean",
