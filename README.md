@@ -19,7 +19,7 @@ Le module principal est découpé en plusieurs librairies interdépendantes :
 ### Workspaces
 - **`tests/`** : Workspace de test indépendant utilisant les libraries de test
 
-Ce projet contient aussi une documentation sur le RGAA et sur ce linter. Elle permet notamment d'indiquer dans les erreurs ou alerte lint un lien vers cette documentation. Cette documentation sera générée par Retype et publier dans GitHub pages du repository.
+Ce projet contient aussi une documentation sur le RGAA et sur ce linter. Elle permet notamment d'indiquer dans les erreurs ou alerte lint un lien vers cette documentation. Cette documentation sera publiée sur GitHub Pages du repository.
 
 ## Installation
 
