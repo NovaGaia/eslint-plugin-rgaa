@@ -9,7 +9,7 @@ const path = require('path');
  */
 
 function getGlossaryFiles() {
-  const glossaryDir = path.join(__dirname, '..', 'doc', 'rgaa', 'glossaire');
+  const glossaryDir = path.join(__dirname, '..', '..', 'doc', 'rgaa', 'glossaire');
   
   if (!fs.existsSync(glossaryDir)) {
     console.log('⚠️  Dossier glossaire non trouvé');
@@ -94,7 +94,7 @@ function processCriterion(criterionPath, glossaryMap) {
 }
 
 function main() {
-  const criteresDir = path.join(__dirname, '..', 'doc', 'rgaa', 'criteres');
+  const criteresDir = path.join(__dirname, '..', '..', 'doc', 'rgaa', 'criteres');
   
   if (!fs.existsSync(criteresDir)) {
     console.error('❌ Dossier criteres non trouvé:', criteresDir);

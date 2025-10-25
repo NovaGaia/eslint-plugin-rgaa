@@ -143,3 +143,4 @@ vite.config.ts.timestamp-*
 
 # Documentation source files
 doc-init/
+doc-utils/node_modules/

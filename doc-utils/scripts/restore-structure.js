@@ -203,8 +203,8 @@ function processMarkdownFiles(dir) {
 }
 
 function main() {
-  const sourceDir = path.join(__dirname, '..', 'doc', 'rgaa', 'criteres');
-  const targetDir = path.join(__dirname, '..', 'doc-restore', 'rgaa', 'criteres');
+  const sourceDir = path.join(__dirname, '..', '..', 'doc', 'rgaa', 'criteres');
+  const targetDir = path.join(__dirname, '..', '..', 'doc-restore', 'rgaa', 'criteres');
   
   if (!fs.existsSync(sourceDir)) {
     console.error('❌ Dossier source non trouvé:', sourceDir);

@@ -199,25 +199,29 @@ node tests/eslint-plugin-rgaa-test/dist/index.js test:criterion 1.1
 cd tests/eslint-plugin-rgaa-ide/examples
 npx eslint jsx/1.1/example-with-issues.jsx
 
-# Documentation - Migration de structure
-pnpm docs:migrate              # Migrer l'ancienne structure vers la nouvelle
-pnpm docs:restore              # Restaurer l'ancienne structure (si nécessaire)
-pnpm docs:test-migration       # Tester que la migration fonctionne
+# Documentation (depuis doc-utils/)
+cd doc-utils
+pnpm install                   # Installer les dépendances de documentation
 
-# Documentation - Traitement de contenu
-pnpm docs:add-titles           # Ajouter des titres aux pages
-pnpm docs:include-tests        # Intégrer les tests dans les pages
-pnpm docs:include-annexes      # Intégrer les annexes dans les pages
-pnpm docs:fix-links            # Corriger les liens WCAG
-pnpm docs:fix-internal-links   # Corriger les liens internes
-pnpm docs:add-titles-faq-glossaire # Ajouter des titres FAQ/glossaire
-pnpm docs:setup                # Appliquer tous les traitements de documentation
+# Migration de structure
+pnpm migrate                   # Migrer l'ancienne structure vers la nouvelle
+pnpm restore                   # Restaurer l'ancienne structure (si nécessaire)
+pnpm test-migration            # Tester que la migration fonctionne
 
-# Documentation - Intégration complète
-pnpm docs:integrate-content    # Intégrer le contenu complet des tests et annexes
-pnpm docs:validate-integration # Valider que l'intégration est identique au backup
+# Traitement de contenu
+pnpm add-titles                # Ajouter des titres aux pages
+pnpm include-tests             # Intégrer les tests dans les pages
+pnpm include-annexes           # Intégrer les annexes dans les pages
+pnpm fix-links                 # Corriger les liens WCAG
+pnpm fix-internal-links        # Corriger les liens internes
+pnpm add-titles-faq-glossaire  # Ajouter des titres FAQ/glossaire
+pnpm setup                     # Appliquer tous les traitements de documentation
 
-# Documentation - VitePress
+# Intégration complète
+pnpm integrate-content         # Intégrer le contenu complet des tests et annexes
+pnpm validate-integration      # Valider que l'intégration est identique au backup
+
+# VitePress (depuis la racine)
 pnpm docs:build                # Build de la documentation
 pnpm docs:serve                # Serveur de développement
 pnpm docs:watch                # Mode watch
@@ -259,14 +263,30 @@ pnpm docs:publish              # Publication sur GitHub Pages
 
 ## Scripts de documentation
 
-### Scripts de migration
-- `scripts/migrate-structure.js` : Migre de l'ancienne structure plate vers la nouvelle thématique
-- `scripts/restore-structure.js` : Restaure l'ancienne structure plate
-- `scripts/test-migration.js` : Teste le script de migration
+**Note** : Tous les scripts de documentation ont été déplacés dans le dossier `doc-utils/` pour une meilleure organisation.
 
-### Scripts d'intégration
-- `scripts/integrate-content.js` : Intègre le contenu complet des tests et annexes dans les pages de critères
-- `scripts/validate-integration.js` : Valide que l'intégration est identique au backup
+### Structure
+- **`doc-utils/`** : Dossier dédié aux scripts de documentation
+- **`doc-utils/package.json`** : Scripts et dépendances de documentation (js-yaml uniquement)
+- **`doc-utils/scripts/`** : Tous les scripts de transformation
+
+### Scripts disponibles (depuis `doc-utils/`)
+- `migrate` : Migre de l'ancienne structure plate vers la nouvelle thématique
+- `restore` : Restaure l'ancienne structure plate
+- `test-migration` : Teste le script de migration
+- `integrate-content` : Intègre le contenu complet des tests et annexes
+- `validate-integration` : Valide que l'intégration est identique au backup
+- `add-titles` : Ajoute des titres aux pages de critères
+- `include-tests` : Intègre les tests dans les pages de critères
+- `include-annexes` : Intègre les annexes dans les pages de critères
+- `fix-links` : Corrige les liens WCAG
+- `fix-internal-links` : Corrige les liens internes
+- `add-titles-faq-glossaire` : Ajoute des titres aux pages FAQ et glossaire
+- `setup` : Applique tous les traitements de documentation
+
+### Dépendances séparées
+- **Package principal** : VitePress, gh-pages, ESLint, TypeScript, Turbo
+- **Doc-utils** : js-yaml (uniquement pour parser le frontmatter YAML)
 
 ### Scripts de test spécialisés
 - `test:verbose` : Tests avec détails complets
@@ -277,9 +297,10 @@ pnpm docs:publish              # Publication sur GitHub Pages
 
 ### Workflow de documentation
 1. **Modifier** les fichiers dans `doc-init/` (structure plate)
-2. **Migrer** : `pnpm docs:migrate` (vers structure thématique)
-3. **Intégrer** : `pnpm docs:integrate-content` (contenu complet)
-4. **Valider** : `pnpm docs:validate-integration` (vérification)
+2. **Migrer** : `cd doc-utils && pnpm migrate` (vers structure thématique)
+3. **Intégrer** : `cd doc-utils && pnpm integrate-content` (contenu complet)
+4. **Valider** : `cd doc-utils && pnpm validate-integration` (vérification)
+5. **Build** : `pnpm docs:build` (génération VitePress depuis la racine)
 
 ## Notes de développement
 
@@ -288,3 +309,6 @@ pnpm docs:publish              # Publication sur GitHub Pages
 - **Vérifier les exemples IDE** (erreurs visibles dans l'éditeur)
 - **Respecter la séparation des critères** (1.1 ≠ 1.2 ≠ 1.3)
 - **Documenter les changements** dans ce fichier
+- **Scripts de documentation** : Utiliser `cd doc-utils && pnpm <script>`
+- **VitePress** : Utiliser `pnpm docs:build` depuis la racine
+- **Dépendances** : js-yaml uniquement dans doc-utils, VitePress dans le package principal

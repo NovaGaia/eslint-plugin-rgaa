@@ -20,8 +20,8 @@ function compareFiles(file1, file2) {
 }
 
 function testMigration() {
-  const sourceDir = path.join(__dirname, '..', 'doc-init', 'rgaa', 'criteres');
-  const targetDir = path.join(__dirname, '..', 'doc', 'rgaa', 'criteres');
+  const sourceDir = path.join(__dirname, '..', '..', 'doc-init', 'rgaa', 'criteres');
+  const targetDir = path.join(__dirname, '..', '..', 'doc', 'rgaa', 'criteres');
   
   console.log('🧪 Test de migration...');
   

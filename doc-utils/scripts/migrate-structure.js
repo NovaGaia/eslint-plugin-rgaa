@@ -123,7 +123,7 @@ const THEMATIC_MAPPING = {
 };
 
 function getGlossaryFiles() {
-  const glossaryDir = path.join(__dirname, '..', 'doc', 'rgaa', 'glossaire');
+  const glossaryDir = path.join(__dirname, '..', '..', 'doc', 'rgaa', 'glossaire');
   
   if (!fs.existsSync(glossaryDir)) {
     console.log('⚠️  Dossier glossaire non trouvé');
@@ -252,7 +252,7 @@ function processMarkdownFiles(dir, glossaryMap) {
 
 function createThematicIndexFiles() {
   const thematicDirs = new Set(Object.values(THEMATIC_MAPPING));
-  const criteresDir = path.join(__dirname, '..', 'doc', 'rgaa', 'criteres');
+  const criteresDir = path.join(__dirname, '..', '..', 'doc', 'rgaa', 'criteres');
   
   for (const thematicDir of thematicDirs) {
     const thematicPath = path.join(criteresDir, thematicDir);
@@ -280,8 +280,8 @@ Cette section contient les critères RGAA relatifs à ${thematicDir.replace(/-/g
 }
 
 function main() {
-  const sourceDir = path.join(__dirname, '..', 'doc-init', 'rgaa', 'criteres');
-  const targetDir = path.join(__dirname, '..', 'doc', 'rgaa', 'criteres');
+  const sourceDir = path.join(__dirname, '..', '..', 'doc-init', 'rgaa', 'criteres');
+  const targetDir = path.join(__dirname, '..', '..', 'doc', 'rgaa', 'criteres');
   
   if (!fs.existsSync(sourceDir)) {
     console.error('❌ Dossier source non trouvé:', sourceDir);

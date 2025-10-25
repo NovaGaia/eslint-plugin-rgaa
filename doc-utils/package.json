@@ -1,0 +1,23 @@
+{
+  "name": "eslint-plugin-rgaa-doc-utils",
+  "version": "0.1.0",
+  "description": "Scripts utilitaires pour la gestion de la documentation ESLint Plugin RGAA",
+  "private": true,
+  "scripts": {
+    "migrate": "node scripts/migrate-structure.js",
+    "restore": "node scripts/restore-structure.js",
+    "test-migration": "node scripts/test-migration.js",
+    "add-titles": "node scripts/add-titles.js",
+    "include-tests": "node scripts/include-tests.js",
+    "include-annexes": "node scripts/include-annexes.js",
+    "fix-links": "node scripts/fix-wcag-links.js",
+    "fix-internal-links": "node scripts/fix-internal-links.js",
+    "add-titles-faq-glossaire": "node scripts/add-titles-faq-glossaire.js",
+    "setup": "pnpm run add-titles && pnpm run include-tests && pnpm run include-annexes && pnpm run fix-links && pnpm run fix-internal-links && pnpm run add-titles-faq-glossaire",
+    "integrate-content": "node scripts/integrate-content.js",
+    "validate-integration": "node scripts/validate-integration.js"
+  },
+  "devDependencies": {
+    "js-yaml": "4.1.0"
+  }
+}

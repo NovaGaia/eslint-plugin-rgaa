@@ -120,7 +120,7 @@ function processCriterion(criterionPath) {
 }
 
 function main() {
-  const criteresDir = path.join(__dirname, '..', 'doc', 'rgaa', 'criteres');
+  const criteresDir = path.join(__dirname, '..', '..', 'doc', 'rgaa', 'criteres');
   
   if (!fs.existsSync(criteresDir)) {
     console.error('❌ Dossier criteres non trouvé:', criteresDir);

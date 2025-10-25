@@ -5,7 +5,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 /**
- * Script pour ajouter les titres des critères RGAA dans le corps des fichiers markdown
+ * Script pour ajouter les titres des pages FAQ et glossaire dans le corps des fichiers markdown
  */
 
 function extractTitleFromFrontmatter(content) {
@@ -55,10 +55,10 @@ function processFile(filePath) {
     
     if (newContent !== content) {
       fs.writeFileSync(filePath, newContent, 'utf8');
-      console.log(`✅ Titre ajouté: ${path.basename(path.dirname(filePath))} - ${title}`);
+      console.log(`✅ Titre ajouté: ${path.basename(filePath)} - ${title}`);
       return true;
     } else {
-      console.log(`ℹ️  Titre déjà présent: ${path.basename(path.dirname(filePath))}`);
+      console.log(`ℹ️  Titre déjà présent: ${path.basename(filePath)}`);
       return false;
     }
   } catch (error) {
@@ -67,43 +67,25 @@ function processFile(filePath) {
   }
 }
 
-function main() {
-  const criteresDir = path.join(__dirname, '..', 'doc', 'rgaa', 'criteres');
-  
-  if (!fs.existsSync(criteresDir)) {
-    console.error('❌ Dossier criteres non trouvé:', criteresDir);
-    process.exit(1);
+function processDirectory(dirPath, dirName) {
+  if (!fs.existsSync(dirPath)) {
+    console.log(`⚠️  Dossier ${dirName} non trouvé: ${dirPath}`);
+    return { processed: 0, skipped: 0, errors: 0 };
   }
   
-  console.log('🔍 Recherche des fichiers index.md...');
+  const files = fs.readdirSync(dirPath);
+  const markdownFiles = files.filter(file => file.endsWith('.md'));
   
-  const indexFiles = [];
-  
-  function findIndexFiles(dir) {
-    const items = fs.readdirSync(dir);
-    
-    for (const item of items) {
-      const fullPath = path.join(dir, item);
-      const stat = fs.statSync(fullPath);
-      
-      if (stat.isDirectory()) {
-        findIndexFiles(fullPath);
-      } else if (item === 'index.md') {
-        indexFiles.push(fullPath);
-      }
-    }
-  }
-  
-  findIndexFiles(criteresDir);
-  
-  console.log(`📁 ${indexFiles.length} fichiers index.md trouvés`);
+  console.log(`📁 ${markdownFiles.length} fichiers ${dirName} trouvés`);
   
   let processed = 0;
   let skipped = 0;
   let errors = 0;
   
-  for (const filePath of indexFiles) {
+  for (const file of markdownFiles) {
+    const filePath = path.join(dirPath, file);
     const result = processFile(filePath);
+    
     if (result === true) {
       processed++;
     } else if (result === false) {
@@ -115,11 +97,45 @@ function main() {
     }
   }
   
-  console.log('\n📊 Résumé:');
-  console.log(`✅ Fichiers traités: ${processed}`);
-  console.log(`ℹ️  Fichiers ignorés: ${skipped}`);
-  console.log(`❌ Erreurs: ${errors}`);
-  console.log(`📁 Total: ${indexFiles.length}`);
+  return { processed, skipped, errors };
+}
+
+function main() {
+  const docDir = path.join(__dirname, '..', '..', 'doc', 'rgaa');
+  
+  if (!fs.existsSync(docDir)) {
+    console.error('❌ Dossier doc/rgaa non trouvé:', docDir);
+    process.exit(1);
+  }
+  
+  console.log('🔍 Recherche des fichiers FAQ et glossaire...');
+  
+  const faqDir = path.join(docDir, 'faq');
+  const glossaireDir = path.join(docDir, 'glossaire');
+  
+  let totalProcessed = 0;
+  let totalSkipped = 0;
+  let totalErrors = 0;
+  
+  // Traiter les fichiers FAQ
+  console.log('\n📋 Traitement des fichiers FAQ...');
+  const faqResults = processDirectory(faqDir, 'FAQ');
+  totalProcessed += faqResults.processed;
+  totalSkipped += faqResults.skipped;
+  totalErrors += faqResults.errors;
+  
+  // Traiter les fichiers glossaire
+  console.log('\n📚 Traitement des fichiers glossaire...');
+  const glossaireResults = processDirectory(glossaireDir, 'glossaire');
+  totalProcessed += glossaireResults.processed;
+  totalSkipped += glossaireResults.skipped;
+  totalErrors += glossaireResults.errors;
+  
+  console.log('\n📊 Résumé global:');
+  console.log(`✅ Fichiers traités: ${totalProcessed}`);
+  console.log(`ℹ️  Fichiers ignorés: ${totalSkipped}`);
+  console.log(`❌ Erreurs: ${totalErrors}`);
+  console.log(`📁 Total: ${totalProcessed + totalSkipped + totalErrors}`);
 }
 
 if (require.main === module) {
