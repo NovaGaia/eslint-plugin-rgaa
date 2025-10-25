@@ -1,6 +1,7 @@
 {
   "name": "eslint-plugin-rgaa-test",
   "version": "0.1.0",
+  "private": true,
   "description": "Test library for RGAA accessibility linting rules",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

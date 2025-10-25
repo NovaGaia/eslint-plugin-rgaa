@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-rgaa-html",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "HTML linter for RGAA accessibility rules",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -36,4 +36,3 @@
     "eslint": ">=9.0.0"
   }
 }
-

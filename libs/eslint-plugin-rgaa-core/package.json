@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-rgaa-core",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "Core library for RGAA accessibility linting rules",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

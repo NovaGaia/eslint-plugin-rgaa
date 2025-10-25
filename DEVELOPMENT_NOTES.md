@@ -226,6 +226,12 @@ pnpm docs:build                # Build de la documentation
 pnpm docs:serve                # Serveur de développement
 pnpm docs:watch                # Mode watch
 pnpm docs:publish              # Publication sur GitHub Pages
+
+# Changeset (gestion des versions)
+pnpm changeset                 # Créer un nouveau changeset
+pnpm changeset status          # Voir le statut des changesets
+pnpm version-packages          # Mettre à jour les versions (génère CHANGELOG)
+pnpm release                   # Publier sur npm
 ```
 
 ## Prochaines étapes possibles
@@ -312,3 +318,8 @@ pnpm docs:publish              # Publication sur GitHub Pages
 - **Scripts de documentation** : Utiliser `cd doc-utils && pnpm <script>`
 - **VitePress** : Utiliser `pnpm docs:build` depuis la racine
 - **Dépendances** : js-yaml uniquement dans doc-utils, VitePress dans le package principal
+- **Changeset** : Gestion des versions et publication automatique sur npm
+- **Synchronisation** : Versions synchronisées entre eslint-plugin-rgaa-core et eslint-plugin-rgaa-html
+- **Packages privés** : Tests et exemples IDE marqués comme privés (non publiés sur npm)
+- **CHANGELOG** : Généré automatiquement par changeset dans chaque package
+- **HISTORY.md** : Historique manuel des versions précédentes

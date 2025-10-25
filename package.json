@@ -39,13 +39,17 @@
     "docs:build": "vitepress build doc",
     "docs:serve": "vitepress dev doc",
     "docs:publish": "vitepress build doc && gh-pages -d doc/.vitepress/dist",
-    "docs:watch": "vitepress dev doc"
+    "docs:watch": "vitepress dev doc",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish"
   },
   "packageManager": "pnpm@8.15.0",
   "devDependencies": {
-    "eslint": "^9.0.0",
+    "@changesets/cli": "2.29.7",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
     "gh-pages": "^6.0.0",
     "turbo": "^1.10.0",
     "typescript": "^5.0.0",
