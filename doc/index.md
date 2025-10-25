@@ -9,21 +9,22 @@ Ce plugin ESLint vous permet de valider automatiquement l'accessibilité de vos 
 ## 🚀 Installation
 
 ```bash
-npm install --save-dev eslint-plugin-rgaa
+npm install --save-dev eslint-plugin-rgaa-html
 ```
 
 ## ⚡ Utilisation rapide
 
 ```javascript
-// .eslintrc.js
-module.exports = {
-  plugins: ['rgaa'],
-  rules: {
-    'rgaa/alt-text': 'error',
-    'rgaa/heading-hierarchy': 'warn',
-    'rgaa/color-contrast': 'error'
+// eslint.config.js
+const rgaaHtmlPlugin = require('eslint-plugin-rgaa-html');
+
+module.exports = [
+  {
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
+    plugins: { 'rgaa-html': rgaaHtmlPlugin },
+    rules: { ...rgaaHtmlPlugin.configs.recommended.rules }
   }
-};
+];
 ```
 
 ## 📚 Documentation
@@ -34,8 +35,8 @@ module.exports = {
 
 ## 🔗 Liens utiles
 
-- [Repository GitHub](https://github.com/renaudheluin/eslint-plugin-rgaa)
-- [Package NPM](https://www.npmjs.com/package/eslint-plugin-rgaa)
+- [Repository GitHub](https://github.com/NovaGaia/eslint-plugin-rgaa)
+- [Package NPM](https://www.npmjs.com/package/eslint-plugin-rgaa-html)
 - [RGAA Officiel](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/)
 
 ## 🤝 Contribuer

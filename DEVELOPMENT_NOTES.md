@@ -249,8 +249,8 @@ pnpm release                   # Publier sur npm
 - **Version** : 0.1.0
 - **Auteur** : Renaud Heluin
 - **Licence** : MIT
-- **Repository** : https://github.com/renaudheluin/eslint-plugin-rgaa.git
-- **Homepage** : https://renaudheluin.github.io/eslint-plugin-rgaa/
+- **Repository** : https://github.com/NovaGaia/eslint-plugin-rgaa.git
+- **Homepage** : https://novagaia.github.io/eslint-plugin-rgaa/
 - **Mots-clés** : eslint, eslintplugin, accessibility, rgaa, a11y, linter, france
 
 ### Configuration technique
@@ -262,10 +262,8 @@ pnpm release                   # Publier sur npm
 ## Fichiers de configuration importants
 
 - `eslint.config.js` : Configuration par défaut
-- `example-local-config.js` : Exemple de surcharge locale
-- `example-custom-options.js` : Exemple avec options personnalisées
-- `CONFIGURATION.md` : Guide de configuration détaillé
-- `doc/commentaires-rgaa.md` : Documentation des commentaires ESLint
+- `doc/` : Documentation utilisateur complète
+- `DEVELOPMENT_NOTES.md` : Documentation développeur (ce fichier)
 
 ## Scripts de documentation
 

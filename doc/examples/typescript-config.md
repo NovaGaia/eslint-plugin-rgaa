@@ -1,6 +1,13 @@
+# Configuration avec TypeScript
+
+Configuration complète avec support TypeScript et JSX.
+
+## Code de configuration
+
+```javascript
 const typescriptEslint = require('@typescript-eslint/eslint-plugin');
 const typescriptParser = require('@typescript-eslint/parser');
-const rgaaHtmlPlugin = require('./libs/eslint-plugin-rgaa-html/dist/index.js');
+const rgaaHtmlPlugin = require('eslint-plugin-rgaa-html');
 
 module.exports = [
   {
@@ -40,11 +47,25 @@ module.exports = [
       
       // Configuration RGAA par défaut
       ...rgaaHtmlPlugin.configs.recommended.rules,
-      
-      // Surcharges locales du projet
-      'rgaa-html/rgaa-1-1': 'error',   // Garde le niveau error
-      'rgaa-html/rgaa-1-2': 'warn',    // Change de error à warn pour ce projet
-      'rgaa-html/rgaa-1-3': ['warn', { minLength: 50 }], // Change la longueur minimale
     }
   }
 ];
+```
+
+## Installation
+
+```bash
+npm install --save-dev eslint-plugin-rgaa-html @typescript-eslint/eslint-plugin @typescript-eslint/parser
+```
+
+## Fonctionnalités
+
+- ✅ Support TypeScript complet
+- ✅ Support JSX/TSX
+- ✅ Règles TypeScript recommandées
+- ✅ Règles RGAA activées
+- ✅ Configuration des globals Node.js et React
+
+## Fichier de configuration
+
+Vous pouvez télécharger ce fichier : [typescript-config.js](./typescript-config.js)

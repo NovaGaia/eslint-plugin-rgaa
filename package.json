@@ -16,12 +16,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/renaudheluin/eslint-plugin-rgaa.git"
+    "url": "https://github.com/NovaGaia/eslint-plugin-rgaa.git"
   },
   "bugs": {
-    "url": "https://github.com/renaudheluin/eslint-plugin-rgaa/issues"
+    "url": "https://github.com/NovaGaia/eslint-plugin-rgaa/issues"
   },
-  "homepage": "https://renaudheluin.github.io/eslint-plugin-rgaa/",
+  "homepage": "https://novagaia.github.io/eslint-plugin-rgaa/",
   "engines": {
     "node": ">=20.0.0"
   },
