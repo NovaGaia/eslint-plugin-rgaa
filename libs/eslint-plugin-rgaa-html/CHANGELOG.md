@@ -1,5 +1,17 @@
 # eslint-plugin-rgaa-html
 
+## 0.2.2
+
+### Patch Changes
+
+- 8f16614: Test de synchronisation des versions avec changeset
+
+  - Configuration des packages en mode "fixed" pour synchroniser les versions
+  - Ajout de "private": true aux packages de test pour éviter la publication
+
+- Updated dependencies [8f16614]
+  - eslint-plugin-rgaa-core@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes
