@@ -15,7 +15,9 @@ export default defineConfig({
     // Navigation principale
     nav: [
       { text: 'Accueil', link: '/' },
-      { text: 'Guide', link: '/guide' },
+      { text: 'Installation', link: '/usage/installation' },
+      { text: 'Configuration', link: '/usage/configuration' },
+      { text: 'Exemples', link: '/examples/' },
       { text: 'Critères RGAA', link: '/rgaa/' },
       { text: 'Contribuer', link: '/contributing' }
     ],
@@ -27,14 +29,49 @@ export default defineConfig({
           text: 'Introduction',
           items: [
             { text: 'Accueil', link: '/' },
-            { text: 'Guide d\'utilisation', link: '/guide' },
-            { text: 'Contribuer', link: '/contributing' }
+            { text: 'Guide d\'utilisation', link: '/guide' }
+          ]
+        },
+        {
+          text: 'Utilisation',
+          items: [
+            { text: 'Installation', link: '/usage/installation' },
+            { text: 'Configuration', link: '/usage/configuration' },
+            { text: 'Exemples', link: '/examples/' },
+            { text: 'Commentaires RGAA', link: '/commentaires-rgaa' }
           ]
         },
         {
           text: 'Critères RGAA',
           items: [
             { text: 'Vue d\'ensemble', link: '/rgaa/' }
+          ]
+        },
+        {
+          text: 'Développement',
+          items: [
+            { text: 'Contribuer', link: '/contributing' }
+          ]
+        }
+      ],
+      '/usage/': [
+        {
+          text: 'Guide d\'utilisation',
+          items: [
+            { text: 'Installation', link: '/usage/installation' },
+            { text: 'Configuration', link: '/usage/configuration' },
+            { text: 'Commentaires RGAA', link: '/commentaires-rgaa' }
+          ]
+        }
+      ],
+      '/examples/': [
+        {
+          text: 'Exemples de configuration',
+          items: [
+            { text: 'Configuration de base', link: '/examples/basic-config' },
+            { text: 'Avec TypeScript', link: '/examples/typescript-config' },
+            { text: 'Options personnalisées', link: '/examples/custom-options' },
+            { text: 'Surcharges locales', link: '/examples/local-overrides' }
           ]
         }
       ],
@@ -78,7 +115,7 @@ export default defineConfig({
     
     // Liens sociaux
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/renaudheluin/eslint-plugin-rgaa' }
+      { icon: 'github', link: 'https://github.com/NovaGaia/eslint-plugin-rgaa' }
     ],
     
     // Footer

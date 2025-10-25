@@ -236,11 +236,30 @@ pnpm release                   # Publier sur npm
 
 ## Prochaines étapes possibles
 
-1. **Implémentation d'autres critères RGAA** (2.1, 2.2, etc.)
-2. **Amélioration de la documentation** (exemples plus complets)
-3. **Tests de performance** (optimisation des règles)
-4. **Intégration CI/CD** (validation automatique)
-5. **Plugin VSCode** (interface graphique)
+### En cours
+1. **Optimisation des libs NPM** - Rendre les packages publiés les plus légers possibles
+2. **Amélioration du workflow Changeset** - Ajouter lint, build et test au workflow GitHub Actions
+
+### À venir
+3. **Implémentation d'autres critères RGAA** (2.1, 2.2, etc.)
+4. **Amélioration de la documentation** (exemples plus complets)
+5. **Tests de performance** (optimisation des règles)
+6. **Plugin VSCode** (interface graphique)
+
+### Détails des tâches en cours
+
+#### Optimisation des libs NPM
+- Analyser les `package.json` des libs pour optimiser les `files`
+- Vérifier et minimiser les dépendances
+- Optimiser la taille des bundles
+- S'assurer que seuls les fichiers nécessaires sont publiés
+
+#### Workflow Changeset amélioré
+- **Lint** : Intégrer `pnpm lint` avec exclusion des libs examples
+- **Build** : Intégrer `pnpm build` pour vérifier la compilation
+- **Test** : Intégrer `pnpm test` pour valider les tests
+- **Configuration ESLint** : Désactiver le linting sur les dossiers examples
+- **⚠️ IMPORTANT** : S'assurer que le lint ne bloque pas la CI à cause des examples (fichiers `-with-issues` qui contiennent volontairement des erreurs)
 
 ## Informations du projet
 
@@ -249,8 +268,8 @@ pnpm release                   # Publier sur npm
 - **Version** : 0.1.0
 - **Auteur** : Renaud Heluin
 - **Licence** : MIT
-- **Repository** : https://github.com/renaudheluin/eslint-plugin-rgaa.git
-- **Homepage** : https://renaudheluin.github.io/eslint-plugin-rgaa/
+- **Repository** : https://github.com/NovaGaia/eslint-plugin-rgaa.git
+- **Homepage** : https://novagaia.github.io/eslint-plugin-rgaa/
 - **Mots-clés** : eslint, eslintplugin, accessibility, rgaa, a11y, linter, france
 
 ### Configuration technique
@@ -262,10 +281,8 @@ pnpm release                   # Publier sur npm
 ## Fichiers de configuration importants
 
 - `eslint.config.js` : Configuration par défaut
-- `example-local-config.js` : Exemple de surcharge locale
-- `example-custom-options.js` : Exemple avec options personnalisées
-- `CONFIGURATION.md` : Guide de configuration détaillé
-- `doc/commentaires-rgaa.md` : Documentation des commentaires ESLint
+- `doc/` : Documentation utilisateur complète
+- `DEVELOPMENT_NOTES.md` : Documentation développeur (ce fichier)
 
 ## Scripts de documentation
 

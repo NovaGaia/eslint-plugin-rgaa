@@ -1,6 +1,6 @@
 const typescriptEslint = require('@typescript-eslint/eslint-plugin');
 const typescriptParser = require('@typescript-eslint/parser');
-const rgaaHtmlPlugin = require('./libs/eslint-plugin-rgaa-html/dist/index.js');
+const rgaaHtmlPlugin = require('eslint-plugin-rgaa-html');
 
 module.exports = [
   {
@@ -40,11 +40,6 @@ module.exports = [
       
       // Configuration RGAA par défaut
       ...rgaaHtmlPlugin.configs.recommended.rules,
-      
-      // Configuration avec options personnalisées
-      'rgaa-html/rgaa-1-3': ['warn', { 
-        minLength: 30,  // Longueur minimale personnalisée (défaut: 25)
-      }],
     }
   }
 ];
