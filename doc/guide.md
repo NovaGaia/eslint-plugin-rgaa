@@ -115,4 +115,4 @@ Ignore complètement une image :
 
 - Consultez la [documentation complète](usage/configuration) pour la configuration
 - Regardez les [exemples pratiques](examples/) pour des cas d'usage spécifiques
-- Consultez les [critères RGAA](rgaa/criteres/) pour comprendre les règles
+- Consultez les [critères RGAA](rgaa/) pour comprendre les règles

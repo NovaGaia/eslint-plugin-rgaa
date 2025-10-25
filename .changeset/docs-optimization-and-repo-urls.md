@@ -18,6 +18,7 @@
 - **Repository GitHub** : Toutes les références mises à jour vers `https://github.com/NovaGaia/eslint-plugin-rgaa`
 - **Homepage** : Mise à jour vers `https://novagaia.github.io/eslint-plugin-rgaa/`
 - **Liens cohérents** : Issues, discussions, et liens de contribution corrigés
+- **Lien mort corrigé** : `guide.md` - lien vers critères RGAA corrigé
 
 ### Structure finale
 
