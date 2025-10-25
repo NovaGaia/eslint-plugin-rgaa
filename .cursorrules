@@ -1,0 +1,46 @@
+# Cursor Rules - ESLint Plugin RGAA
+
+## Contexte du projet
+Ce projet est un plugin ESLint pour valider les critères du RGAA (Référentiel Général d'Amélioration de l'Accessibilité).
+
+### Architecture
+- **Monorepo** avec Turbo et pnpm (UNIQUEMENT pnpm)
+- **ESLint 9** configuration flat
+- **TypeScript** pour le développement
+- **Structure** : `libs/` (core, html), `tests/` (test, ide-examples), `doc/` (versionnée), `doc-init/` (sources, ignoré)
+
+### Règles implémentées
+- **RGAA 1.1** : Présence d'alternatives textuelles (`error`)
+- **RGAA 1.2** : Images décoratives (`error`)
+- **RGAA 1.3** : Pertinence des alternatives (`warn`)
+
+### Points critiques
+1. **Séparation des critères** : RGAA 1.1 ≠ 1.2 ≠ 1.3 (logiques différentes)
+2. **Images par défaut** : Toutes informatives sauf commentaire explicite
+3. **SVG/Canvas** : Gestion spéciale des alternatives (éléments enfants)
+4. **Tests** : 50 tests passent, exemples IDE cohérents
+5. **Configuration** : Niveaux par défaut, surcharge locale possible
+
+### Fichiers importants
+- `DEVELOPMENT_NOTES.md` : Notes techniques complètes
+- `CHANGELOG.md` : Historique des changements
+- `CONFIGURATION.md` : Guide de configuration
+- `libs/eslint-plugin-rgaa-core/src/utils.ts` : Fonctions utilitaires
+- `tests/eslint-plugin-rgaa-ide/examples/` : Exemples IDE
+- `scripts/integrate-content.js` : Script d'intégration du contenu
+- `scripts/validate-integration.js` : Script de validation
+
+### Commandes essentielles
+```bash
+pnpm build && pnpm test  # Validation complète
+cd tests/eslint-plugin-rgaa-ide/examples && npx eslint jsx/1.1/example-with-issues.jsx  # Test IDE
+pnpm docs:integrate-content    # Intégrer le contenu de documentation
+pnpm docs:validate-integration # Valider l'intégration
+```
+
+### Règles de développement
+- Toujours tester après modification
+- Respecter la séparation des critères
+- Documenter les changements dans DEVELOPMENT_NOTES.md
+- Utiliser UNIQUEMENT pnpm
+- Vérifier les exemples IDE après modification
